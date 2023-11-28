@@ -1,12 +1,5 @@
 
-<<<<<<< HEAD
-=======
-.idea
-.idea/workspace.xml
-.idea/workspace.xml
->>>>>>> 0bc1099816ad6659aa3e5c68b4bbd52dee7168b4
 .DS_Store
-.idea/workspace.xml
 .idea/artifacts/apputveckling_war_exploded.xml
 .idea/artifacts/apputveckling_war.xml
 .idea/artifacts/apputveckling_war.xml
@@ -25,21 +18,4 @@
 .idea/misc.xml
 .idea/modules.xml
 .idea/workspace.xml
-.idea/artifacts/apputveckling_war.xml
-.idea/artifacts/apputveckling_war_exploded.xml
-.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_11_4.xml
-.idea/libraries/Maven__jakarta_platform_jakarta_jakartaee_web_api_9_1_0.xml
-.idea/libraries/Maven__mysql_mysql_connector_java_8_0_28.xml
-.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml
-.idea/libraries/Maven__org_jfree_jcommon_1_0_24.xml
-.idea/libraries/Maven__org_jfree_jfreechart_1_5_4.xml
-.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_9_2.xml
-.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_9_2.xml
-.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_9_2.xml
-.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_9_2.xml
-.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/workspace.xml
-.idea/misc.xml
-.idea/workspace.xml
+/.idea/
