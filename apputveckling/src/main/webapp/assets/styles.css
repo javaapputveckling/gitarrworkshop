@@ -39,6 +39,7 @@
 }
 
 .history_div{
+
     position: absolute;
     margin-top: 2%;
     padding: 2%;
@@ -48,6 +49,7 @@
     height: 45%;
     border-radius: 25px;
     box-shadow: 2px 2px 5px #808080;
+
 
 }
 
@@ -70,3 +72,4 @@
     text-align: center;
     margin: auto;
 }
+
