@@ -10,9 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
-<<<<<<< HEAD
-
->>>>>>> 6e21128d80acf3729f2b313895bf2cef6d4bf758
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GlassFish 7" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 7.0.9" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17">
+    <configuration name="GlassFish 7" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 7.0.10" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <deployment>
         <artifact name="apputveckling:war exploded">
@@ -193,12 +191,9 @@
       <workItem from="1701083139841" duration="747000" />
       <workItem from="1701095575408" duration="10292000" />
       <workItem from="1701162728497" duration="62000" />
-<<<<<<< HEAD
       <workItem from="1701177270014" duration="3224000" />
-=======
       <workItem from="1701177270014" duration="599000" />
       <workItem from="1701180384203" duration="81000" />
->>>>>>> 6e21128d80acf3729f2b313895bf2cef6d4bf758
     </task>
     <task id="LOCAL−00001" summary="inte helt klar med att fixa db:n">
       <option name="closed" value="true" />
