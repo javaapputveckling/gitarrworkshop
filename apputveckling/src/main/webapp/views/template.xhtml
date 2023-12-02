@@ -7,30 +7,52 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <head>
     <title>My Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="#{request.contextPath}/assets/styles.css"/>
     <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
-    <h:outputScript library="js" name="bootstrap.bundle.min.js" target="head"/>
+    <script type="text/javascript" src="https://www.google.com/jsapi"> </script><!-- Google Charts -->
+    <script src="#{request.contextPath}/resources/js/statistics.js" type=""> </script>
+    <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['bar']});
+        google.charts.setOnLoadCallback(drawStuff);
+    </script>
+    <!-- This previous code didn't import the bootstrap js bundle successfully:
+    <h:outputScript library="js" name="bootstrap.bundle.min.js" target="head"/> -->
 </head>
 <body>
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-custom">
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a class="nav-link text-white" href="admin_home.xhtml">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="admin_calendar.xhtml">Calendar</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="admin_cases.xhtml">Cases</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="admin_members.xhtml">Members</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="admin_products.xhtml">Products</a>
-        </li>
-    </ul>
+<div class="d-flex">
+    <!-- Sidebar for mobile -->
+    <div class="d-md-none">
+        <button class="btn btn-light text-dark border border-secondary m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+            &#9776; <!-- Unicode character for hamburger icon -->
+        </button>
+    </div>
+
+    <!-- Sidebar for desktop -->
+    <div class="d-none d-md-block vh-100">
+        <div class="bg-dark text-white h-100 fs-5">
+            <div class="d-flex flex-column h-100 p-2">
+                <ui:include src="nav-items.xhtml"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offcanvas Sidebar for mobile -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="sidebar" data-bs-toggle="offcanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title"> </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"> </button>
+        </div>
+        <div class="offcanvas-body">
+            <ui:include src="nav-items.xhtml"/>
+        </div>
+    </div>
+
+    <!-- Content area -->
+    <div class="flex-grow-1">
+        <ui:insert name="content"/>
+    </div>
 </div>
-<ui:insert name="content"/>
 </body>
 </html>

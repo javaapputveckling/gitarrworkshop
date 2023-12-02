@@ -1,4 +1,75 @@
 .sidebar-custom {
-    height: max-content;
-    width: 10%;
+     height: max-content;
+     width: 10%;
+ }
+#search_bar{
+    margin-bottom: 1%;
+    width: 30%;
+    border-radius: 12px;
 }
+
+.Medlemmar{
+    position: absolute;
+    width: 90%;
+    top: 50%;
+    height: 5%;
+}
+.test{
+
+    max-height: 200px;
+    overflow-y: auto;
+
+
+}
+.history_list{
+    position: relative;
+    max-height: 55%;
+    overflow-y: auto;
+
+}
+.add_button {
+    position: relative;
+    left: 35%;
+    width: 30%;
+    background-color: grey;
+    border-radius: 12px;
+    color: white;
+    border: 1px solid black;
+    margin-top: 3%;
+}
+
+.history_div{
+
+    position: absolute;
+    margin-top: 2%;
+    padding: 2%;
+    right: 6%;
+    top: 5%;
+    width: 80%;
+    height: 45%;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px #808080;
+
+
+}
+
+
+.card-img-top{
+    max-width: 300px;
+    max-height: 400px;
+    min-height: 400px;
+    resize: block;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+.menu{
+    text-align: center;
+}
+.card{
+    text-align: center;
+    margin: auto;
+}
+

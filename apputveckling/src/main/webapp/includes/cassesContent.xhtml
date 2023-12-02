@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <title>Work Cases</title>
+   <style>
+      body {
+         -webkit-touch-callout: none;
+         -webkit-user-select: none;
+         -khtml-user-select: none;
+         -moz-user-select: none;
+         -ms-user-select: none;
+         user-select: none;
+      }
+
+      .case {
+         cursor: pointer;
+         padding: 10px;
+         margin: 10px;
+         background-color: #f0f0f0;
+         position: relative;
+         border-radius: 10px;
+         transition: background-color 0.3s ease;
+      }
+
+      .description {
+         display: none;
+         padding: 10px;
+         margin: 10px;
+         background-color: #e0e0e0;
+         transition: max-height 0.3s ease;
+         overflow: hidden;
+      }
+
+      .arrow {
+         display: inline-block;
+         margin-right: 5px;
+         border: solid #333;
+         border-width: 0 2px 2px 0;
+         padding: 3px;
+         transform: rotate(45deg);
+         transition: transform 0.3s ease;
+      }
+
+
+      .status-container {
+         display: flex;
+         align-items: center;
+         margin-bottom: 10px;
+      }
+
+      .status-indicator {
+         display: inline-block;
+         width: 10px;
+         height: 10px;
+         border-radius: 50%;
+         margin-right: 5px;
+      }
+
+      .edit-button {
+         position: absolute;
+         top: 10px;
+         right: 10px;
+         cursor: pointer;
+         color: blue;
+         text-decoration: underline;
+      }
+
+      .status-text {
+         font-weight: bold;
+      }
+
+      .status-done { background-color: green; }
+      .status-in-progress { background-color: yellow; }
+      .status-pending { background-color: rgb(128, 128, 128); }
+      .search-filter-container{
+         margin: 10px;
+      }
+   </style>
+   <script>
+      function toggleDescription(caseId) {
+         var description = document.getElementById("description_" + caseId);
+         var arrow = document.getElementById("arrow_" + caseId);
+
+         if (description.style.display === 'none') {
+            description.style.display = 'block';
+            arrow.style.transform = 'rotate(225deg)';
+         } else {
+            description.style.display = 'none';
+            arrow.style.transform = 'rotate(45deg)';
+         }
+      }
+
+      function editCase(caseId) {
+         alert("Edit Case " + caseId);
+      }
+   </script>
+</head>
+<body>
+<div class="search-filter-container">
+   <input type="text" class="search-input" placeholder="Search..."></input>
+   <button class="filter-button">Filter</button>
+   <button class="add-button">Add</button>
+</div>
+
+<div class="case" onclick="toggleDescription(1)">
+   <div class="status-container">
+      <div class="status-indicator status-done"></div>
+      <span class="status-text">Status: Done</span>
+   </div>
+   <span id="arrow_1" class="arrow"></span>
+   <span class="case-number">Case Number: 1</span>
+   <div id="description_1" class="description">
+      Description for Case 1: Description here.
+      <span class="edit-button" onclick="editCase(1)">Edit</span>
+   </div>
+</div>
+
+<div class="case" onclick="toggleDescription(2)">
+   <div class="status-container">
+      <div class="status-indicator status-in-progress"></div>
+      <span class="status-text">Status: In Progress</span>
+   </div>
+   <span id="arrow_2" class="arrow"></span>
+   <span class="case-number">Case Number: 2</span>
+   <div id="description_2" class="description">
+      Description for Case 2: Description here.
+      <span class="edit-button" onclick="editCase(2)">Edit</span>
+   </div>
+</div>
+
+<div class="case" onclick="toggleDescription(3)">
+   <div class="status-container">
+      <div class="status-indicator status-pending"></div>
+      <span class="status-text">Status: Pending</span>
+   </div>
+   <span id="arrow_3" class="arrow"></span>
+   <span class="case-number">Case Number: 3</span>
+   <div id="description_3" class="description">
+      Description for Case 3: Description here.
+      <span class="edit-button" onclick="editCase(3)">Edit</span>
+   </div>
+</div>
+
+</body>
+</html>
