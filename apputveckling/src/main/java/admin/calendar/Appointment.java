@@ -5,6 +5,9 @@ import jakarta.json.bind.annotation.JsonbTypeSerializer;
 import java.sql.Date;
 import java.sql.Time;
 
+/**
+ * This class represents an appointment from the database with all the parameters.
+ */
 public class Appointment {
     private int appointmentId;
     private int clientId;

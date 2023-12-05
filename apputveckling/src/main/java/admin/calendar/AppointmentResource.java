@@ -11,10 +11,7 @@ import jakarta.ws.rs.core.MediaType;
 
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,6 +23,7 @@ public class AppointmentResource {
     private DataSource dataSource;
 
     private List<Appointment> appointments;
+    private List<AppointmentAPI> appointmentsAPI;
     private static final Logger LOGGER = Logger.getLogger(AppointmentResource.class.getName());
 
     @PostConstruct
@@ -35,12 +33,14 @@ public class AppointmentResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Appointment> getAppointments() {
-        return appointments;
+    public List<AppointmentAPI> getAppointments() {
+        //return appointments;
+        return appointmentsAPI;
     }
 
     private void loadAppointments() {
-        appointments = new ArrayList<>();
+        //appointments = new ArrayList<>();
+        appointmentsAPI = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "SELECT * FROM APPOINTMENT";
@@ -49,7 +49,8 @@ public class AppointmentResource {
                  ResultSet resultSet = statement.executeQuery()) {
 
                 while (resultSet.next()) {
-                    appointments.add(mapResultSetToAppointment(resultSet));
+                    //appointments.add(mapResultSetToAppointment(resultSet));
+                    appointmentsAPI.add(mapResultSetToAppointmentForAPI(resultSet));
                 }
             }
         } catch (SQLException e) {
@@ -67,5 +68,20 @@ public class AppointmentResource {
         appointment.setAppointmentTime(resultSet.getTime("APPOINTMENT_TIME"));
         appointment.setAppointmentDesc(resultSet.getString("APPOINTMENT_DESC"));
         return appointment;
+    }
+
+    /**
+     * This method maps the result set to an AppointmentAPI object (Calendar.js parameter names).
+     */
+    private AppointmentAPI mapResultSetToAppointmentForAPI(ResultSet resultSet) throws SQLException {
+        AppointmentAPI appointmentAPI = new AppointmentAPI();
+        appointmentAPI.setId(resultSet.getInt("APPOINTMENT_ID"));
+        appointmentAPI.setTitle(resultSet.getString("APPOINTMENT_TYPE"));
+        // Get date and time from resultSet
+        Date appointmentDate = resultSet.getDate("APPOINTMENT_DATE");
+        Time appointmentTime = resultSet.getTime("APPOINTMENT_TIME");
+        // Combine date and time into a from string
+        appointmentAPI.setFrom(appointmentDate.toString() + "T" + appointmentTime.toString() + "Z");
+        return appointmentAPI;
     }
 }
