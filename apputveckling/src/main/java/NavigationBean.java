@@ -7,7 +7,29 @@ import java.io.IOException;
 @Named
 @SessionScoped
 public class NavigationBean implements java.io.Serializable{
+    private String selectedSection = "home";
+    private String currentPage = "home";
     public NavigationBean() {
+    }
+    public String goToClientHome(){
+        this.selectedSection = "home";
+        return "home";
+    }
+    public String goToClientProducts(){
+        this.selectedSection = "product";
+        return "product";
+    }
+    public String goToClientReserve(){
+        this.selectedSection = "Reserve";
+        return "Reserve";
+    }
+
+    public String getSelectedSection() {
+        return selectedSection;
+    }
+
+    public void setSelectedSection(String selectedSection) {
+        this.selectedSection = selectedSection;
     }
 
     public void redirectToAdminHome() throws IOException {
@@ -32,6 +54,7 @@ public class NavigationBean implements java.io.Serializable{
     public String goToMembers() throws IOException {
         return "admin_members";
     }
+
 
 
 }

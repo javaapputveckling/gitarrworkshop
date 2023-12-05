@@ -7,9 +7,23 @@
     width: 30%;
     border-radius: 12px;
 }
+.custom-input{
+    margin-bottom: 1%;
+    width: 30%;
+    border-radius: 12px;
+}
+.custom-button{
+    position: relative;
+    margin-left: 1%;
+    width: 8%;
+    background-color: grey;
+    border-radius: 12px;
+    color: white;
+    border: 1px solid black;
+
+}
 
 .Medlemmar{
-    position: absolute;
     width: 90%;
     top: 50%;
     height: 5%;
@@ -19,7 +33,9 @@
     max-height: 200px;
     overflow-y: auto;
 
-
+}
+#link_styl:hover{
+    background-color: lightblue;
 }
 .history_list{
     position: relative;
@@ -40,7 +56,6 @@
 
 .history_div{
 
-    position: absolute;
     margin-top: 2%;
     padding: 2%;
     right: 6%;

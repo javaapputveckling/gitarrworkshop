@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<body>
+
+    <div class="customer_info">
+
+        <h1>Client Details</h1>
+        <h:form>
+            <h:commandButton value="Delete Client" action="#{clientBean.deleteEntity(clientBean.clientToEdit.clientID)}"/>
+
+            <p:commandButton styleClass="editClient" value="Edit Client" action="editMember" update=":editClient"
+                             oncomplete="PF('editClient').show()"/>
+
+        </h:form>
+
+        <p:dialog id="editClient" widgetVar="editClient" modal="true" visible="false" header="Edit Client" >
+            <ui:include src="editMember.xhtml"/>
+        </p:dialog>
+
+        <p>#{clientBean.clientToEdit.clientID}</p>
+        <p>#{clientBean.clientToEdit.name}</p>
+        <p>#{clientBean.clientToEdit.date}</p>
+        <p>#{clientBean.clientToEdit.email}</p>
+
+    </div>
+
+
+</body>
+</html>
