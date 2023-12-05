@@ -1,10 +1,6 @@
 
 
 
-var calendarInstanceMonthly = new calendarJs( "calendarMonthly", {
-    manualEditingEnabled: false,
-    showExtraTitleBarButtons: false,
-} );
 
 var calendarInstanceWeekly = new calendarJs("calendarWeekly", {
     manualEditingEnabled: true,
@@ -15,24 +11,32 @@ var calendarInstanceWeekly = new calendarJs("calendarWeekly", {
     workingHoursEnd: "18:00",
     showWeekendDays: false,
     weekendDays: [5,6],
-    minutesBetweenSections: "60",
+    minutesBetweenSections: 60,
     defaultEventDuration: 60,
     useLocalStorageForEvents: true,
-} );
-
-
-var calendarInstanceWidget = new calendarJs( "calendarWidget", {
-    manualEditingEnabled: true,
-    isWidget: true,
-} );
-
-function deleteHours() {
-    var hourParent = document.getElementsByClassName("hours")[1];
-    var size = hourParent.childNodes.length;
-
-    for (let i = size - 1; i >= 0; i--) {
-        if (i < 10 || i > 18) {
-            hourParent.removeChild(hourParent.childNodes[i]);
-        }
-    }
+    showExtraTitleBarButtons:false,
 }
+);
+
+function getEvents(){
+    const apiURL = "http://localhost:8080/apputveckling-1.0-SNAPSHOT/calendar/appointments"
+
+
+// Make a GET request
+    fetch(apiURL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+}
+
+
