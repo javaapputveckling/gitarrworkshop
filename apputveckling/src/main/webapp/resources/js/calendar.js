@@ -1,7 +1,3 @@
-
-
-
-
 var calendarInstanceWeekly = new calendarJs("calendarWeekly", {
     manualEditingEnabled: true,
     visibleDays: [0, 1, 2, 3, 4],
@@ -18,25 +14,27 @@ var calendarInstanceWeekly = new calendarJs("calendarWeekly", {
 }
 );
 
-function getEvents(){
-    const apiURL = "http://localhost:8080/apputveckling-1.0-SNAPSHOT/calendar/appointments"
+function fetchEvents() {
+    const apiURL = "http://localhost:8080/apputveckling-1.0-SNAPSHOT/calendar/appointments";
 
-
-// Make a GET request
-    fetch(apiURL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+    return fetch(apiURL)
+        .then(response => response.json())
         .then(data => {
-            console.log(data);
+            // You can process the data here if needed
+            return data;
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error fetching data:', error);
         });
-
 }
+
+// Example of using the fetched data in another function
+function AddEvents() {
+    fetchEvents().then(data => {
+        
+    });
+}
+
+
 
 
