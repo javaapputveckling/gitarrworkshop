@@ -4,182 +4,104 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
+<h:head>
+
+</h:head>
 <body>
 
 <div class="history_div">
-   <h3>History</h3>
-   <hr/>
-   <div class="row">
+    <h3>History</h3>
+    <hr/>
 
-      <div class="col">
-         <p class="card-text"><strong>Name: </strong></p>
-      </div>
+    <div class="card">
+        <div class="row">
 
-      <div class="col">
-         <p class="card-text"><strong>Appointment Typ: </strong></p>
-      </div>
+            <div class="col">
+                <p class="card-text"><strong>ID: </strong></p>
+            </div>
+            <div class="col">
+                <p class="card-text"><strong>Name: </strong></p>
+            </div>
 
-      <div class="col">
-         <p class="card-text"><strong>Time: </strong></p>
-      </div>
+            <div class="col">
+                <p class="card-text"><strong>Appointment Typ: </strong></p>
+            </div>
 
-   </div>
+            <div class="col">
+                <p class="card-text"><strong>Time: </strong></p>
+            </div>
 
-   <div class="card mt-3 history_list">
+        </div>
 
-      <div class="card-body">
-         <div class="container">
+    </div>
 
+
+    <div class="card mt-3 history_list">
+
+        <ui:repeat value="#{clientBean.clients}" var="clients">
             <div class="row">
+                <div class="col">
+                    <p class="card-text">#{clients.clientID}</p>
+                </div>
 
-               <div class="col">
-                  <p class="card-text">The Goat</p>
-               </div>
+                <div class="col">
+                    <p class="card-text">#{clients.name}</p>
+                </div>
 
-               <div class="col">
-                  <p class="card-text">Reparation</p>
-               </div>
+                <div class="col">
+                    <p class="card-text">#{clients.cas_type}</p>
+                </div>
 
-               <div class="col">
-                  <p class="card-text">2023-11-20</p>
-               </div>
+                <div class="col">
+                    <p class="card-text">#{clients.date}</p>
+                </div>
+
 
             </div>
             <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Johannes Bestis</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-18</p>
-               </div>
-
-            </div>
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Nasir Bootstrap</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reparation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-16</p>
-               </div>
-
-            </div>
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Amarildo Min Chatgpt</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-15</p>
-               </div>
-
-            </div>
-
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Taha Kungen</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-15</p>
-               </div>
-
-            </div>
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Seran project-ledare</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-15</p>
-               </div>
-
-            </div>
-
-            <hr/>
-            <div class="row">
-
-               <div class="col">
-                  <p class="card-text">Emmanuel New Guy</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">Reservation</p>
-               </div>
-
-               <div class="col">
-                  <p class="card-text">2023-11-15</p>
-               </div>
-
-            </div>
-
-         </div>
+        </ui:repeat>
 
 
-
-
-      </div>
-
-
-   </div>
+    </div>
 </div>
 
 
-
 <div class=" m-3 p-xl-4 Medlemmar">
-   <!-- Your content goes here -->
-   <label for="search_bar">Medlemmar:</label><br></br>
-   <input type="text" id="search_bar" name="fname" value="Sök namn"/>
+    <!-- Your content goes here -->
 
 
-   <div class="list-group list-group-item-action test">
-      <a href="#" class="list-group-item active">Aaron Hank</a>
-      <a href="#" class="list-group-item">Abagnale Frank</a>
-      <a href="#" class="list-group-item">Abbey Edward</a>
-      <a href="#" class="list-group-item">Abel Reuben</a>
-      <a href="#" class="list-group-item">Bachelot Roselyne</a>
-      <a href="#" class="list-group-item">LiCarey Sandrank</a>
-      <a href="#" class="list-group-item">Dean James</a>
-      <a href="#" class="list-group-item">Link</a>
-      <a href="#" class="list-group-item">Link</a>
-      <a href="#" class="list-group-item">Link</a>
+    <h:form>
+        <h5 style="margin-top:2px">Client List</h5>
+        <h:inputText styleClass="custom-input" value="#{clientBean.searchName}"/>
+        <h:commandButton styleClass="custom-button" value="Submit" action="#{clientBean.Search}"/>
+    </h:form>
 
-   </div>
+    <div class="list-group list-group-action test">
 
-   <button class="add_button" onclick="window.location.href='../includes/customerInfo.xhtml'">Add new members</button>
+        <h:form>
+            <ui:repeat value="#{clientBean.clients}" var="client">
+                <h:commandLink action="#{clientBean.setClientToEdit(client.clientID)}" styleClass="list-group-item list-group-item-action">
+                    <f:param name="clientId" value="#{client.clientID}" />
+                    #{client.name}
+                </h:commandLink>
+            </ui:repeat>
+        </h:form>
+
+    </div>
+
+<h:form>
+    <p:commandButton styleClass="add_button m-3" value="Add New Client" action="#{clientBean.addClient()}" update=":addcilent"
+     oncomplete="PF('addcilent').show()"/>
+
+</h:form>
+
+    <p:dialog id="addcilent" widgetVar="addcilent" modal="true" visible="false" header="Add Client" >
+        <ui:include src="editMember.xhtml"/>
+    </p:dialog>
+
 </div>
 
 
