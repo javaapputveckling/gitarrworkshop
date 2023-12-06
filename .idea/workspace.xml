@@ -10,8 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="börjar med calender funktioner för att lägga till och spara events samt att visa de.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/assets/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/assets/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/js/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/js/calendar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -199,6 +200,8 @@
       <workItem from="1701162728497" duration="62000" />
       <workItem from="1701177270014" duration="599000" />
       <workItem from="1701793434595" duration="15936000" />
+      <workItem from="1701819945130" duration="176000" />
+      <workItem from="1701855594144" duration="6884000" />
     </task>
     <task id="LOCAL−00001" summary="inte helt klar med att fixa db:n">
       <option name="closed" value="true" />

@@ -13,7 +13,9 @@ var calendarInstanceWeekly = new calendarJs("calendarWeekly", {
     showExtraTitleBarButtons:false,
 }
 );
-
+// var newevent = {id:"3", from:"2023-12-07T14:30:00Z", title:"reservation", to:"2023-12-07T15:30:00Z"};
+// calendarInstanceWeekly.addEvent(newevent)
+// calendarInstanceWeekly.addEvent({id:"1", from:"2023-12-07T16:30:00Z", title:"reservation", to:"2023-12-07T17:30:00Z"})
 function fetchEvents() {
     const apiURL = "http://localhost:8080/apputveckling-1.0-SNAPSHOT/calendar/appointments";
 
@@ -21,6 +23,9 @@ function fetchEvents() {
         .then(response => response.json())
         .then(data => {
             // You can process the data here if needed
+            for (let i = 0; i<data.length;i++){
+                calendarInstanceWeekly.addEvent({id:data[i].id, from:data[i].from, title:data[i].title, to:"2024-01-01T15:30:00Z", color:"red"});
+            }
             return data;
         })
         .catch(error => {
@@ -28,12 +33,9 @@ function fetchEvents() {
         });
 }
 
+//fetchEvents();
 // Example of using the fetched data in another function
-function AddEvents() {
-    fetchEvents().then(data => {
-        
-    });
-}
+
 
 
 

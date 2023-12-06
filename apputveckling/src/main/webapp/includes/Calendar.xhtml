@@ -8,16 +8,22 @@
     </h:head>
 
     <h:body>
-            <div class="">
-                <div id="calendarWeekly" style="height: 80rem; width: 80%" >
+        <div class="container row">
+
+
+            <div class="col-9">
+                <div id="calendarWeekly" style="height: 65rem;" >
                 </div>
             </div>
-            <div class="">
-                <button>
+            <div class="container col">
+                <form>
+                    <label>
+                        <input type="datetime-local" style="width: 30%"> </input>
+                    </label>
+                </form>
 
-                </button>
             </div>
-
+        </div>
         <script type="text/javascript" src="#{request.contextPath}/resources/js/Calendar.js-main/dist/calendar.js"> </script>
         <script type="text/javascript" src="#{request.contextPath}/resources/js/calendar.js"> </script>
     </h:body>
