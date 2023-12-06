@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="apputveckling:war exploded" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="532cfd4c-b6eb-4764-9323-5ee1838e48b7" name="Changes" comment="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db." />
+    <list default="true" id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="börjar med calender funktioner för att lägga till och spara events samt att visa de.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/assets/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/assets/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/includes/Calendar.xhtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/js/calendar.js" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/js/calendar.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
       <list>
-        <option value="client-page" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="PROTOTYPE_1_dbjojo" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -24,12 +42,47 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "PROTOTYPE__2"
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2Yd6fhRnl5COXuilQ45Pn5S5qbZ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;calendar______patched&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
-}]]></component>
-  <component name="RunManager" selected="GlassFish Server.GlassFish 6.9.0">
+}</component>
+  <component name="RunManager" selected="GlassFish Server.GlassFish 7">
     <configuration name="DB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="admin.DB.DB" />
       <module name="apputveckling" />
@@ -43,10 +96,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GlassFish 6.9.0" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 6.9.0" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="UPDATING_POLICY" value="restart-server" />
+    <configuration name="GlassFish 7" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 7.0.10" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="/usr/lib/jvm/java-1.17.0-openjdk-amd64">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <deployment>
-        <artifact name="apputveckling:war">
+        <artifact name="apputveckling:war exploded">
           <settings />
         </artifact>
       </deployment>
@@ -110,89 +163,95 @@
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="apputveckling:war" />
+          <artifact name="apputveckling:war exploded" />
         </option>
       </method>
     </configuration>
-    <configuration default="true" type="GlassfishConfiguration" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="UPDATING_POLICY" value="restart-server" />
-      <deployment />
-      <server-settings>
-        <option name="DOMAIN" value="domain1" />
-        <option name="PRESERVE" value="false" />
-        <option name="COMPATIBILITY" value="false" />
-        <option name="VIRTUAL_SERVER" />
-        <option name="USERNAME" value="admin" />
-      </server-settings>
-      <predefined_log_file enabled="true" id="GlassFish" />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="9009" />
-      </RunnerSettings>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="calendar.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/js/calendar.js" working-dir="$PROJECT_DIR$/apputveckling/src/main/webapp/resources/js">
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.DB" />
-      <item itemvalue="GlassFish Server.GlassFish 6.9.0" />
+      <item itemvalue="GlassFish Server.GlassFish 7" />
+      <item itemvalue="Node.js.calendar.js" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.calendar.js" />
+        <item itemvalue="Application.DB" />
+        <item itemvalue="Application.DB" />
         <item itemvalue="Application.DB" />
         <item itemvalue="Application.DB" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="90764d02-e937-4ed8-8daf-3aad08b97eeb" name="Changes" comment="" />
+      <created>1700843213757</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700843213757</updated>
+      <workItem from="1700843214826" duration="856000" />
+      <workItem from="1701011846252" duration="59000" />
+      <workItem from="1701083139841" duration="747000" />
+      <workItem from="1701095575408" duration="10292000" />
+      <workItem from="1701162728497" duration="62000" />
+      <workItem from="1701177270014" duration="599000" />
+      <workItem from="1701793434595" duration="15936000" />
+      <workItem from="1701819945130" duration="176000" />
+      <workItem from="1701855594144" duration="6884000" />
+    </task>
+    <task id="LOCAL−00001" summary="inte helt klar med att fixa db:n">
+      <option name="closed" value="true" />
+      <created>1701099829217</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1701099829217</updated>
+    </task>
+    <task id="LOCAL−00002" summary="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
+      <option name="closed" value="true" />
+      <created>1701106202550</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1701106202550</updated>
+    </task>
+    <task id="LOCAL−00003" summary="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
+      <option name="closed" value="true" />
+      <created>1701106484478</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1701106484478</updated>
+    </task>
+    <task id="LOCAL−00004" summary="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db.">
+      <option name="closed" value="true" />
+      <created>1701106552139</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1701106552140</updated>
+    </task>
+    <task id="LOCAL-00005" summary="börjar med calender funktioner för att lägga till och spara events samt att visa de.">
+      <option name="closed" value="true" />
+      <created>1701800251776</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701800251776</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="inte helt klar med att fixa db:n" />
     <MESSAGE value="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db." />
-    <option name="LAST_COMMIT_MESSAGE" value="nu har jag fixat create database if not exist + alla relevanta tables. med vissa getters och inserts till db." />
+    <MESSAGE value="börjar med calender funktioner för att lägga till och spara events samt att visa de." />
+    <option name="LAST_COMMIT_MESSAGE" value="börjar med calender funktioner för att lägga till och spara events samt att visa de." />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/gitarrworkshop$GlassFish_7.ic" NAME="GlassFish 7 Coverage Results" MODIFIED="1701793687814" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
