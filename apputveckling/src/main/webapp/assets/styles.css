@@ -16,15 +16,24 @@
     position: relative;
     margin-left: 1%;
     width: 8%;
-    background-color: grey;
+    background-color:dodgerblue;
     border-radius: 12px;
     color: white;
-    border: 1px solid black;
+    border: none;
+
+}
+.customer_info{
+    margin-left: 15%;
+    margin-top: 5%;
+    background-color: lightgray;
+    padding: 2%;
+    border-radius: 12px;
+    box-shadow: 2px 2px 5px #808080; ;
 
 }
 
 .Medlemmar{
-    width: 90%;
+
     top: 50%;
     height: 5%;
 }
@@ -60,14 +69,12 @@
     padding: 2%;
     right: 6%;
     top: 5%;
-    width: 80%;
     height: 45%;
     border-radius: 25px;
     box-shadow: 2px 2px 5px #808080;
 
 
 }
-
 
 .card-img-top{
     max-width: 300px;
@@ -100,6 +107,7 @@
 .calendar-flex-col2-cust {
     width: 50%;
 }
+
 .calendarWeekly{
 
 }
@@ -113,3 +121,4 @@
 /*    width: 30%;*/
 
 /*}*/
+

@@ -10,7 +10,13 @@
       <div class="container">
          <h:panelGrid columns="2">
             <h:outputLabel for="fullName" value="Full Name:"/>
+
             <h:inputText id="fullName" value="#{clientBean.clientToEdit.name}"/>
+            <h:outputLabel for="password" value="Password:"/>
+            <h:inputText id="password" value="#{clientBean.clientToEdit.password}"/>
+
+            <h:outputLabel for="password2" value="Re enter Password:"/>
+            <h:inputText id="password2" value="#{clientBean.clientToEdit.password2}"/>
 
             <h:outputLabel for="email" value="Email:"/>
             <h:inputText id="email" value="#{clientBean.clientToEdit.email}"/>

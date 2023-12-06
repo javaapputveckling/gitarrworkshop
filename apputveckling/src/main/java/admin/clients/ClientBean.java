@@ -1,9 +1,11 @@
 package admin.clients;
+import admin.DB.DB;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import javax.sql.DataSource;
@@ -23,6 +25,8 @@ import java.util.logging.Logger;
 public class ClientBean implements Serializable {
     @Resource(name = "mysql_web")
     private DataSource dataSource;
+    @Inject
+    private DB databaseExample;
     private Client clientToEdit;
 
     private String searchName;
@@ -141,19 +145,22 @@ public class ClientBean implements Serializable {
 
 
     public String saveOrUpdateClient() {
+        //DB databaseExample= new DB();
+
         try (Connection connection = dataSource.getConnection()) {
             String sql;
-            if (clientToEdit.getClientID() == -1) {
-                sql = "INSERT INTO CLIENT (CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL, CLIENT_DATE) VALUES (?, ?, ?, CURRENT_DATE)";
+            if (clientToEdit.getClientID() == -1 && databaseExample.GetNameByName(clientToEdit.getName()).isEmpty()) {
+                sql = "INSERT INTO CLIENT (CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL,PASSWORD, CLIENT_DATE) VALUES (?, ?, ?,?, CURRENT_DATE)";
             } else {
-                sql = "UPDATE CLIENT SET CLIENT_NAME = ?, CLIENT_PHONE = ?, CLIENT_EMAIL= ? WHERE CLIENT_ID = ?";
+                sql = "UPDATE CLIENT SET CLIENT_NAME = ?, CLIENT_PHONE = ?, CLIENT_EMAIL= ?, PASSWORD=? WHERE CLIENT_ID = ?";
             }
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, clientToEdit.getName());
                 statement.setString(2, clientToEdit.getPhone());
                 statement.setString(3, clientToEdit.getEmail());
+                statement.setString(4, clientToEdit.getPassword());
                 if (clientToEdit.getClientID() != -1) {
-                    statement.setInt(4, clientToEdit.getClientID());
+                    statement.setInt(5, clientToEdit.getClientID());
                 }
                 statement.executeUpdate();
             }
@@ -161,7 +168,8 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
         loadClients();
-        return "admin_members.xhtml"; // Return the name of the page where the user can see the member list
+
+        return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
 
     public String addClient() {
@@ -182,7 +190,7 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
         loadClients();
-        return "admin_members.xhtml"; // Return the name of the page where the user can see the member list
+        return "admin_clients.xhtml"; // Return the name of the page where the user can see the member list
     }
 
     // Getter method for the members list
@@ -220,84 +228,9 @@ public class ClientBean implements Serializable {
             Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
         }
 
-        return "admin_members";
+
+        return "admin_clients";
     }
-
-
-
-/*
-    public String Search() {
-        List<Client> matchingName = new ArrayList<>();
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CLIENT WHERE CLIENT_NAME LIKE '%" + this.searchName + "%'";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                ResultSet resultSet = statement.executeQuery();
-
-
-                while (resultSet.next()) {
-                    Client name = mapResultSetToClient(resultSet);
-                    matchingName.add(name);
-                }
-
-                Iterator<Client> iterator = clients.iterator();
-                while (iterator.hasNext()) {
-                    Client match = iterator.next();
-                    if (matchingName.contains(match)) {
-                        iterator.remove(); // Remove the matching client
-                    }
-                }
-
-
-                clients.addAll(0, matchingName);
-
-            }
-        } catch (SQLException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("An error occurred while searching for clients."));
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
-        }
-
-        return "admin_members";
-    }
-    */
-/*
-
-    public String Search(){
-
-        List<Client> matchingName=new ArrayList<>();
-        try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CLIENT WHERE CLIENT_NAME LIKE '%" + this.searchName + "%'";
-            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
-                ResultSet resultSet =  statement.executeQuery();
-
-                while (resultSet.next()) {
-
-                    Client Name = mapResultSetToClient(resultSet);
-                    matchingName.add(Name);
-
-                    for (Client match:clients) {
-
-                        if (match.getName().equals(Name.getName())) {
-                            clients.remove(match); // Delete the person if found
-                        }
-                    }
-                }
-
-                for (Client match:matchingName) {
-                    clients.add(0,match);
-                }
-
-            }
-        } catch (SQLException e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("An error occurred while deleting the member."));
-            Logger.getLogger(ClientBean.class.getName()).log(Level.SEVERE, "SQL Exception", e);
-        }
-
-        return "admin_members";
-    }*/
-
-
-
 
     public static void main(String[] arg){
         ClientBean D=new ClientBean();

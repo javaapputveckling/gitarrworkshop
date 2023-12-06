@@ -51,8 +51,8 @@ public class NavigationBean implements java.io.Serializable{
     public String goToCasesPage() throws IOException {
         return "admin_cases";
     }
-    public String goToMembers() throws IOException {
-        return "admin_members";
+    public String goToClients() throws IOException {
+        return "admin_clients";
     }
 
 

@@ -7,7 +7,7 @@
                         <!-- Bootstrap Carousel for Image Slider -->
                         <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 400px">
                             <div class="carousel-indicators">
-                                <ui:repeat value="#{productImagesBean.getProductImages(item.PRODUCT_ID)}" var="image"
+                                <ui:repeat value="#{item.productImages}" var="image"
                                            varStatus="status">
                                     <button type="button" data-bs-target="#imageCarousel"
                                             data-bs-slide-to="#{status.index}"
@@ -17,7 +17,7 @@
                                 </ui:repeat>
                             </div>
                             <div class="carousel-inner">
-                                <ui:repeat value="#{productImagesBean.getProductImages(item.PRODUCT_ID)}" var="image"
+                                <ui:repeat value="#{item.productImages}" var="image"
                                            varStatus="status">
                                     <div class="carousel-item #{status.index eq 0 ? 'active' : ''}">
                                         <img style="max-height: 400px; cursor: pointer;"

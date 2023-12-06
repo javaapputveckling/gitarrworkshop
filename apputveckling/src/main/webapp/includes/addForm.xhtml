@@ -1,0 +1,31 @@
+<div class="container-fluid" xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:ui="http://java.sun.com/jsf/composite"
+xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <div class="">
+        <h:form enctype="multipart/form-data">
+            <h:outputLabel name="Namn">Produktnamn</h:outputLabel><br/>
+            <h:inputText name="Name" required="true" value="#{productBean.newProduct.PRODUCT_NAME}"/>
+            <h:message for="Name" styleClass="text-danger"/><br/>
+
+
+            <h:outputLabel name="Pris">pris</h:outputLabel><br/>
+            <h:inputText name="Pris" required="true" value="#{productBean.newProduct.PRODUCT_PRICE}"/><br/>
+            <h:outputLabel name="Modellår">Modelår</h:outputLabel><br/>
+            <h:inputText  name="Modellår" required="true" value="#{productBean.newProduct.PRODUCT_YEAR}"/>
+
+            <h:outputLabel name="Main beskrivning">Huvudbeskrivning</h:outputLabel><br/>
+            <h:inputTextarea name="Main beskrivning" required="true" value="#{productBean.newProduct.PRODUCT_MAIN_DESC}"/>
+            <br/>
+            <br/>
+            <h:outputLabel name="Produkt historia">Produkthistorik</h:outputLabel><br/>
+            <h:inputTextarea name="Produkt historia" required="true" value="#{productBean.newProduct.PRODUCT_HISTORY_DESC}"/>
+            <br/>
+            <h:outputLabel name="Produktbild">Produktbild</h:outputLabel><br/>
+            <h:inputFile  name="Produktbild" value="#{productBean.imageFile}"/>
+            <br/>
+
+            <h:commandButton type="submit" value="Ladda upp" action="#{productBean.addProduct()}"/>
+        </h:form>
+    </div>
+
+</div>

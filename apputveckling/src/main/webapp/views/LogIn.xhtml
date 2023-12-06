@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:view>
+
+   <h:head>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+   </h:head>
+
+   <h:body>
+
+      <h1>Sign in page</h1>
+      <div class="container min-vh-100 min-vw-100 d-flex justify-content-center align-items-center">
+
+      <h:form styleClass="border p-5">
+
+         <h:outputLabel  for="txtName">
+            <h:outputText value="Enter Name"> </h:outputText>
+         </h:outputLabel>
+         <h:inputText id="txtName" value="#{signup.name}" styleClass="form-control" required="true"> </h:inputText>
+
+         <br></br>
+
+         <h:outputLabel for="txtpass">
+            <h:outputText value="Enter Password"> </h:outputText>
+         </h:outputLabel>
+         <h:inputText id="txtpass" value="#{signup.password}" styleClass="form-control me-5 " required="true"> </h:inputText>
+         <br></br>
+
+         <p>Not a member? <a href="SignUp.xhtml">Register</a></p>
+
+         <h:commandButton id="cmdInsert"  value="Sign in" action="#{signup.LogIn()}" > </h:commandButton>
+      </h:form>
+
+      </div>
+
+   </h:body>
+</f:view>
+
+</html>

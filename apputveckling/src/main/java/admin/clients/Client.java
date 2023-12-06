@@ -11,6 +11,25 @@ public class Client implements Serializable {
     private String name;
     private String phone;
     private String email;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+
+    private String password2;
 
     private String date;
 
@@ -29,7 +48,6 @@ public class Client implements Serializable {
         this.email = email;
         this.date = date;
         this.cas_type = cas_type;
-
     }
 
 

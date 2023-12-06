@@ -11,9 +11,11 @@ import jakarta.persistence.*;
 public class ProductImages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PROD_IMG_ID")
     private int PROD_IMG_ID;
-    @Column(name = "PRODUCT_ID")
-    private int PRODUCT_ID;
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_ID")
+    private Product product;
     @Column(name = "IMG_PATH_STRING")
     private String imgPathString;
 
@@ -25,12 +27,12 @@ public class ProductImages {
         this.PROD_IMG_ID = PROD_IMG_ID;
     }
 
-    public int getPRODUCT_ID() {
-        return PRODUCT_ID;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setPRODUCT_ID(int PRODUCT_ID) {
-        this.PRODUCT_ID = PRODUCT_ID;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getImgPathString() {
@@ -40,5 +42,4 @@ public class ProductImages {
     public void setImgPathString(String imgPathString) {
         this.imgPathString = imgPathString;
     }
-
 }

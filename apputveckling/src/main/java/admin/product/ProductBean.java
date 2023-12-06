@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * this class is used to get the list of products from the database
@@ -24,10 +25,22 @@ public class ProductBean implements Serializable {
     @Produces
     @PersistenceContext(unitName = "PRODUCT")
     private EntityManager entityManager;
+    Product newProduct = new Product();
+    private Part imageFile;
+
+    public Part getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(Part imageFile) {
+        this.imageFile = imageFile;
+    }
+
+
     List<Product> products; // used to get the list of products from the database
     List<Product> productsDetails; // used to show the details of a specific product
     private String isShowProductDetails = "false"; // used to show the details of a specific product
-    Product newProduct = new Product(); // used to add a product to the database
+
     List<ProductImages> productImagesList; // used to get the list of product images from the database
     private Part saveProductImages; // used to save the product images to the database
 
@@ -105,24 +118,30 @@ public class ProductBean implements Serializable {
     }
 
 
+
     /**
-     * this method is used to add a product to the database
-     * @param productName the name of the product
-     * @param productPrice the price of the product
-     * @param productMainDesc the main description of the product
-     * @param productHistoryDesc the history description of the product
-     * @param productYear the year of the product
+     * this method is used to update a product in the database
+     *
+     * @param productId the id of the product
      */
-    public void addProduct(String productName, int productPrice, String productMainDesc, String productHistoryDesc, int productYear){
-        Product product = new Product();
-        product.setPRODUCT_NAME(productName);
-        product.setPRODUCT_PRICE(productPrice);
-        product.setPRODUCT_MAIN_DESC(productMainDesc);
-        product.setPRODUCT_HISTORY_DESC(productHistoryDesc);
-        product.setPRODUCT_YEAR(productYear);
-        entityManager.persist(product);
+    @Transactional
+    public void deleteProduct(int productId) {
+        entityManager.createQuery("delete from Product p where p.PRODUCT_ID = :productId")
+                .setParameter("productId", productId)
+                .executeUpdate();
     }
 
+    @Transactional
+    public void addProduct() {
+        try {
 
+            entityManager.persist(newProduct);
+            //ProductImagesBean imagesBean =new ProductImagesBean();
+           // imagesBean.addProductImages(newProduct.getPRODUCT_ID(), imageFile);
+        }catch (Exception e){
+            throw e;
+        }
+
+    }
 
 }

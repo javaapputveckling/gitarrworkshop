@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:body>
+    <h:form>
+        <div class="container">
+            <h:panelGrid columns="2">
+                <h:outputLabel for="name" value="Name:"/>
+                <h:inputText id="name" value="#{clientBean.clientToEdit.name}"/>
+
+                <h:outputLabel for="password" value="Password:"/>
+                <h:inputText id="password" value="#{clientBean.clientToEdit.password}"/>
+
+                <h:outputLabel for="password2" value="Password:"/>
+                <h:inputText id="password2" value="#{clientBean.clientToEdit.password2}"/>
+
+                <h:outputLabel for="phone" value="Phone:"/>
+                <h:inputText id="phone" value="#{clientBean.clientToEdit.phone}"/>
+
+                <h:outputLabel for="email" value="Email:"/>
+                <h:inputText id="email" value="#{clientBean.clientToEdit.email}"/>
+
+            </h:panelGrid>
+
+            <h:commandButton value="Submit" action="#{clientBean.saveOrUpdateClient}"/>
+        </div>
+    </h:form>
+</h:body>
+
+</html>

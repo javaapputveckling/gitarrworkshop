@@ -4,7 +4,7 @@
     <div class="row m-3 justify-content-center">
         <ui:repeat value="#{productBean.products}" var="product">
             <div class="col-md-2 m-3 card" style="width: 300px">
-                <img src="#{request.contextPath}/resources/img/#{productImagesBean.getOneImage(product.PRODUCT_ID)}" class="card-img-top" alt="..."/>
+                <img src="#{request.contextPath}/resources/img/#{product.firstImage}" class="card-img-top" alt="..."/>
                 <h4 class="card-title">#{product.PRODUCT_NAME}</h4>
                 <h5 class="card-title">Price: #{product.PRODUCT_PRICE}</h5>
                 <h:form>
