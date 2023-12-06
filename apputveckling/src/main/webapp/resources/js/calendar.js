@@ -33,9 +33,19 @@ function fetchEvents() {
         });
 }
 
-//fetchEvents();
-// Example of using the fetched data in another function
-
+// Fetch events from the API and add them to the calendar
+fetch('http://localhost:8080/apputveckling-1.0-SNAPSHOT/calendar/appointments')
+    .then(response => response.json())
+    .then(data => {
+        // Loop through the array of objects in the 'events' array
+        for (let i = 0; i < data.events.length; i++) {
+            // Add each object as an event to the calendar
+            calendarInstanceWeekly.addEvent(data.events[i]);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 
 
 
