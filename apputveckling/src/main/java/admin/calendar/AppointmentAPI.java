@@ -1,14 +1,15 @@
 package admin.calendar;
 
-import jakarta.json.bind.annotation.JsonbTypeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  * This class represents an appointment from the database with only the parameters required from the
@@ -21,11 +22,11 @@ public class AppointmentAPI {
     public AppointmentAPI() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -35,6 +36,18 @@ public class AppointmentAPI {
 
     public void setTitle(String title) {
         this.title = title;
+        switch (title) {
+            case "Reparation":
+                this.color = "red";
+                break;
+            case "Reservation":
+                this.color = "blue";
+                break;
+            // Add more cases as needed
+            default:
+                this.color = "green";
+                break;
+        }
     }
 
     public LocalDateTime getFrom() {
@@ -95,7 +108,7 @@ public class AppointmentAPI {
 
     @Id
     @Column(name = "APPOINTMENT_ID")
-    private int id;
+    private String id;
     @Column(name = "APPOINTMENT_TYPE")
     private String title;
     @Column(name = "APPOINTMENT_FROM")
