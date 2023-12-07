@@ -17,6 +17,8 @@
                         oncomplete="PF('eventDialog').show();"/>
                 <p:ajax event="eventSelect" listener="#{scheduleBean.onEventSelect}" update="eventDetails"
                         oncomplete="PF('eventDialog').show();"/>
+                <p:ajax event="eventMove" listener="#{scheduleBean.onEventMove}" update="schedule" />
+                <p:ajax event="eventResize" listener="#{scheduleBean.onEventResize}" update="schedule" />
             </p:schedule>
 
             <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="fade" hideEffect="fade">

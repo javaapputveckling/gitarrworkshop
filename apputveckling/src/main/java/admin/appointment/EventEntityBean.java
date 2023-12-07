@@ -34,8 +34,10 @@ public class EventEntityBean implements Serializable {
         EventEntityBean eventEntityBean = new EventEntityBean();
         eventEntityBean.event.setTitle("title");
         eventEntityBean.event.setDescription("description");
-        eventEntityBean.event.setStart_date(new java.util.Date());
-        eventEntityBean.event.setEnd_date(new java.util.Date());
+        eventEntityBean.event.setStart_date(java.time.LocalDateTime.now());
+        eventEntityBean.event.setEnd_date(java.time.LocalDateTime.now());
+        //eventEntityBean.event.setStart_date(new java.util.Date());
+        //eventEntityBean.event.setEnd_date(new java.util.Date());
         eventEntityBean.event.setAll_day(true);
         eventEntityBean.saveEvent(eventEntityBean.event);
     }

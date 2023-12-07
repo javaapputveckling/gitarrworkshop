@@ -2,26 +2,24 @@ package admin.appointment;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
-@Table(name = "Events")
+@Table(name = "EVENT")
 public class EventEntity {
     @Id
-    @GeneratedValue
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private int id;
-    @Column(name = "title")
+    @Column(name = "TITLE")
     private String title;
-    @Column(name = "description")
+    @Column(name = "DESCRIPTION")
     private String description;
-    @Column(name = "start_date")
-    private Date start_date;
-    @Column(name = "end_date")
-    private Date end_date;
-    @Column(name = "all_day")
+    @Column(name = "START_DATE")
+    private LocalDateTime start_date;
+    @Column(name = "END_DATE")
+    private LocalDateTime end_date;
+    @Column(name = "IS_ALL_DAY")
     private boolean all_day;
 
     public EventEntity() {
@@ -51,19 +49,19 @@ public class EventEntity {
         this.description = description;
     }
 
-    public Date getStart_date() {
+    public LocalDateTime getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(LocalDateTime start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public LocalDateTime getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(LocalDateTime end_date) {
         this.end_date = end_date;
     }
 

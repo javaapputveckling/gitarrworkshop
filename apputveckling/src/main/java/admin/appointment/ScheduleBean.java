@@ -7,27 +7,21 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.schedule.ScheduleEntryMoveEvent;
+import org.primefaces.event.schedule.ScheduleEntryResizeEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 import java.io.Serializable;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -50,17 +44,6 @@ public class ScheduleBean implements Serializable {
 
     }
 
-    public void test() {
-        /*model = new DefaultScheduleModel();
-        DefaultScheduleEvent event = DefaultScheduleEvent.builder()
-                .title("title")
-                .startDate(LocalDateTime.of(2019, 7, 27, 12, 00))
-                .endDate(LocalDateTime.of(2019, 7, 27, 12, 30))
-                .build();
-
-        model.addEvent(event);*/
-        loadEventsFromDatabase();
-    }
 
     private void loadEventsFromDatabase() {
         model = new DefaultScheduleModel();
@@ -71,8 +54,10 @@ public class ScheduleBean implements Serializable {
                 ScheduleEvent<?> event = DefaultScheduleEvent.builder()
                         .id(String.valueOf(eventEntity.getId()))
                         .title(eventEntity.getTitle())
-                        .startDate(eventEntity.getStart_date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
-                        .endDate(eventEntity.getEnd_date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+                        .startDate(eventEntity.getStart_date())
+                        .endDate(eventEntity.getEnd_date())
+                        //.startDate(eventEntity.getStart_date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+                        //.endDate(eventEntity.getEnd_date().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
                         .allDay(eventEntity.isAll_day())
                         .build();
                 model.addEvent(event);
@@ -114,6 +99,8 @@ public class ScheduleBean implements Serializable {
                 //model.addEvent(event);
                 entityManager.persist(eventEntity);
                 saveToDatabase(eventEntity);
+                event = convertToScheduleEvent(eventEntity);
+                model.addEvent(event);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -137,10 +124,12 @@ public class ScheduleBean implements Serializable {
         EventEntity eventEntity = new EventEntity();
         eventEntity.setTitle(event.getTitle());
 
-        Date startDate = Date.from(event.getStartDate().atZone(ZoneId.systemDefault()).toInstant());
-        Date endDate = Date.from(event.getEndDate().atZone(ZoneId.systemDefault()).toInstant());
-        eventEntity.setStart_date(startDate);
-        eventEntity.setEnd_date(endDate);
+        eventEntity.setStart_date(event.getStartDate());
+        eventEntity.setEnd_date(event.getEndDate());
+        //LocalDateTime startDate = Date.from(Instant.from(event.getStartDate()));
+        //LocalDateTime endDate = Date.from(event.getEndDate().atZone(ZoneId.systemDefault()).toInstant());
+        //eventEntity.setStart_date(startDate);
+        //eventEntity.setEnd_date(endDate);
         eventEntity.setAll_day(event.isAllDay());
         return eventEntity;
     }
@@ -148,5 +137,46 @@ public class ScheduleBean implements Serializable {
     public void onEventSelect(SelectEvent<ScheduleEvent<?>> selectEvent) {
         event = selectEvent.getObject();
     }
+    private ScheduleEvent<?> convertToScheduleEvent(EventEntity eventEntity) {
+        return DefaultScheduleEvent.builder()
+                .id(String.valueOf(eventEntity.getId()))
+                .title(eventEntity.getTitle())
+                .startDate(eventEntity.getStart_date())
+                .endDate(eventEntity.getEnd_date())
+                .allDay(eventEntity.isAll_day())
+                .build();
+    }
+    @Transactional
+    public void onEventMove(ScheduleEntryMoveEvent event) {
+        ScheduleEvent<?> movedEvent = event.getScheduleEvent();
+        // Find the existing EventEntity in the database
+        EventEntity eventEntity = entityManager.find(EventEntity.class, Integer.parseInt(movedEvent.getId()));
+        // Update the fields of the EventEntity
+        eventEntity.setStart_date(movedEvent.getStartDate());
+        eventEntity.setEnd_date(movedEvent.getEndDate());
+        eventEntity.setAll_day(movedEvent.isAllDay());
+        // Merge the updated EventEntity
+        entityManager.merge(eventEntity);
+        // Remove the old event from the model
+        model.deleteEvent(movedEvent);
+        // Add the updated event to the model
+        model.addEvent(movedEvent);
+    }
 
+    @Transactional
+    public void onEventResize(ScheduleEntryResizeEvent event) {
+        ScheduleEvent<?> resizedEvent = event.getScheduleEvent();
+        // Find the existing EventEntity in the database
+        EventEntity eventEntity = entityManager.find(EventEntity.class, Integer.parseInt(resizedEvent.getId()));
+        // Update the fields of the EventEntity
+        eventEntity.setStart_date(resizedEvent.getStartDate());
+        eventEntity.setEnd_date(resizedEvent.getEndDate());
+        eventEntity.setAll_day(resizedEvent.isAllDay());
+        // Merge the updated EventEntity
+        entityManager.merge(eventEntity);
+        // Remove the old event from the model
+        model.deleteEvent(resizedEvent);
+        // Add the updated event to the model
+        model.addEvent(resizedEvent);
+    }
 }
