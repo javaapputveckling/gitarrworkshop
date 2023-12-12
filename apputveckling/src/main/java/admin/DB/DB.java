@@ -1,5 +1,6 @@
 package admin.DB;
 
+import jakarta.annotation.ManagedBean;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
@@ -15,6 +16,7 @@ import java.sql.*;
 @Named
 @Default
 @ApplicationScoped
+@ManagedBean
 public class DB implements Serializable {
     private DB databaseExample;
     @Resource(name = "mysql_web")
@@ -194,7 +196,72 @@ public class DB implements Serializable {
         }
     }
 
+    public String GetDescByID(int id) {
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = "SELECT CASE_DESC FROM CASES WHERE MEMBER_ID = ?";
 
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            StringBuilder caseDescription = new StringBuilder();
+
+            while (rs.next()) {
+                // Retrieve the result and append to the StringBuilder
+                String partialDescription = rs.getString("CASE_DESC");
+                caseDescription.append(partialDescription).append(" ");
+            }
+            //caseDescription.append("\n");
+
+            // Close resources
+            rs.close();
+            preparedStatement.close();
+            con.close();
+
+            // Convert StringBuilder to String and return
+            String fullDescription = caseDescription.toString().trim();
+            //System.out.println(fullDescription);
+            return fullDescription;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*
+    public String GetDescByID(int id) {
+
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = "SELECT CASE_DESC FROM CASES WHERE MEMBER_ID = ?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            // Set the parameter value
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            String medlems_desc ="ingenting";
+
+            if (rs.next()) {
+                // Retrieve the result
+                medlems_desc = rs.getString("CASE_DESC");
+            }
+
+            // Close resources
+            rs.close();
+            preparedStatement.close();
+            con.close();
+            System.out.println(medlems_desc);
+            return medlems_desc;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+ */
     public String getNameById(int id) {
 
         try {
@@ -233,7 +300,7 @@ public class DB implements Serializable {
 
         try {
             Connection con = dataSource.getConnection();
-            String sql = "SELECT CLIENT_NAME FROM CLIENT WHERE CLIENT_ID = ?";
+            String sql = "SELECT CLIENT_ID FROM CLIENT WHERE CLIENT_NAME = ?";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
@@ -248,9 +315,7 @@ public class DB implements Serializable {
                 // Retrieve the result
                 id = rs.getInt("CLIENT_ID");
                 //System.out.println(id);
-            } /*else {
-                System.out.println("User with ID " + name + " not found.");
-            }*/
+            }
 
             // Close resources
             rs.close();
@@ -409,6 +474,7 @@ public class DB implements Serializable {
         //databaseExample.getIdByEmail("jojo2109@student.miun.se");
         //databaseExample.GetIdByName("f");
         //databaseExample.getNameById(1);
+        //databaseExample.GetDescByID(1);
 //måste fixas        databaseExample.InsertMember("jag",20,1234567,"jagj2723@gmail.com");
         //databaseExample.GetAllName();
     }

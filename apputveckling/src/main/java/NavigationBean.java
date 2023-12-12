@@ -13,15 +13,15 @@ public class NavigationBean implements java.io.Serializable{
     }
     public String goToClientHome(){
         this.selectedSection = "home";
-        return "home";
+        return "ClientHome";
     }
     public String goToClientProducts(){
         this.selectedSection = "product";
-        return "product";
+        return "ClientProduct";
     }
     public String goToClientReserve(){
         this.selectedSection = "Reserve";
-        return "Reserve";
+        return "ClientAppointment";
     }
 
     public String getSelectedSection() {

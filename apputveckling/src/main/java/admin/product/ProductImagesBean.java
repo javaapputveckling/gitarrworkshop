@@ -1,5 +1,6 @@
 package admin.product;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.faces.context.FacesContext;
@@ -19,43 +20,25 @@ import java.util.List;
  * This class is also used to get one product image from the database
  */
 @Named
-@SessionScoped
+@RequestScoped
 public class ProductImagesBean implements Serializable {
 
     @Produces
     @PersistenceContext(unitName = "ProductImages")
     private EntityManager entityManager;
     List<ProductImages> productImages;
-    List<ProductImages> oneImage; // for the product page
     public ProductImagesBean() {
     }
+
     public void setProductImages(List<ProductImages> productImages) {
         this.productImages = productImages;
     }
 
 
-
-
-
-    public void addProductImages(int productId, Part imageFile) {
-       String filename=imageFile.getSubmittedFileName();
-       String imagePath=getImgPath();
-       //saveImage(filename,imageFile,imagePath,productId);
+    public List<ProductImages> getProductImages() {
+        productImages = entityManager.createQuery("select p from ProductImages p", ProductImages.class).getResultList();
+        return productImages;
     }
-
-    @Transactional
-    private void saveImage(String filename, Part imageFile, String imagePath, int productId) {
-        /*try {
-            ProductImages productImages1 =new ProductImages();
-            productImages1.setPRODUCT_ID(productId);
-            productImages1.setImgPathString(filename);
-            entityManager.persist(productImages1);
-
-        }catch (Exception e){
-            throw e;
-        }*/
-    }
-
 
     private String getImgPath() {
         String webapp = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");

@@ -1,14 +1,14 @@
-.myactive{
+.nav-link.nav-item.p-3.myactive{
     text-decoration-line: underline;
     text-underline-position: under;
     text-underline-color: white;
-    text-decoration-thickness: 20px;
+    text-decoration-thickness: 5px;
 }
 .nav-link.nav-item.p-3:hover {
     text-decoration-line: underline;
     text-underline-position: under;
     text-underline-color: white;
-    text-decoration-thickness: 20px;
+    text-decoration-thickness: 5px;
 }
 
 

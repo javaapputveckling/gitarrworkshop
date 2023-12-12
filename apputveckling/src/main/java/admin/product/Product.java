@@ -28,7 +28,7 @@ public class Product {
     @Column(name = "PRODUCT_YEAR")
     private int PRODUCT_YEAR;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductImages> productImages=new ArrayList<>();
+    private List<ProductImages> productImages = new ArrayList<>();
 
     public Product() {
     }

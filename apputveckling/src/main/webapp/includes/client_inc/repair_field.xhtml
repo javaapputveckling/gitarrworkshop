@@ -1,4 +1,4 @@
-<div class="container m-5" >
+<div class="container m-5" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html">
     <div class="card m-5">
         <div class="card-body">
             <h5 class="card-title">Instrument Repair Services</h5>
@@ -17,7 +17,7 @@
             <p class="card-text" id="meetingBox">
                 Ready to get your instrument back in perfect shape? Schedule a meeting with our experts to discuss your specific needs and find the best solution for you.
             </p>
-            <a href="#" class="btn btn-dark">Schedule a Meeting</a>
+                <p:commandButton value="Boka tid" icon="pi pi-calendar" styleClass="font-bold ui-button-outlined" action="#{navigationBean.goToClientReserve()}"/>
         </div>
     </div>
     <div class="card m-5" >
@@ -35,7 +35,7 @@
             <p class="card-text">
                 Ready to discover your next musical companion? Schedule a meeting with our experts and embark on a journey to find the perfect instrument for your musical expression.
             </p>
-            <a href="#" class="btn btn-dark">Schedule a Meeting</a>
+            <p:commandButton value="Boka tid" icon="pi pi-calendar" styleClass="font-bold ui-button-outlined" action="#{navigationBean.goToClientReserve()}"/>
         </div>
     </div>
 </div>

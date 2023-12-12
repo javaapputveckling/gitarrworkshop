@@ -1,33 +1,19 @@
 package admin.cases;
-
+import admin.clients.Client;
 import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Entity
 @Table(name = "CASES")
 @NamedQuery(name = "Cases.All", query = "SELECT cases FROM Cases cases")
 public class Cases{
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int CASE_ID;
     @Column(name = "CASE_DESC")
     private String CASE_DESC;
-
-    @Column(name = "MEMBER_ID")
-    private int MEMBER_ID;
-
-    public int getMEMBER_ID() {
-        return MEMBER_ID;
-    }
-
-    public void setMEMBER_ID(int MEMBER_ID) {
-        this.MEMBER_ID = MEMBER_ID;
-    }
-
     @Column(name = "STATUS")
     private String STATUS;
     @Column(name = "CASE_DATE_START")
@@ -40,50 +26,32 @@ public class Cases{
     private int CASE_HOURS;
     @Column(name = "CASE_TYPE")
     private String CASE_TYPE;
+    @Column(name = "MEMBER_ID")
+    private int MEMBER_ID;
+/*    @OneToMany(mappedBy = "aCase", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Client> test = new ArrayList<>();*/
     @OneToMany(mappedBy = "aCase", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CaseJournal> caseJournals = new ArrayList<>();
-
-    // existing methods...
-
     public List<CaseJournal> getCaseJournals() {
         return caseJournals;
     }
-
     public void setCaseJournals(List<CaseJournal> caseJournals) {
         this.caseJournals = caseJournals;
     }
-//    private String CASE_JOURNAL_DESC;
-
-    /*private String getCASE_JOURNAL(CaseJournal caseJournal){
-
-        return caseJournal.getJOURNAL_DESC();
-    }*/
-
-
     public Cases(){
-
     }
-   /* public void setCASE_JOURNAL_DESC(String CASE_JOURNAL_DESC) {
-        this.CASE_JOURNAL_DESC = CASE_JOURNAL_DESC;
-    }
-
-    public String getCASE_JOURNAL_DESC() {
-        return CASE_JOURNAL_DESC;
-    }*/
     public int getCASE_ID(){
         return CASE_ID;
     }
     public void setCASE_ID(int PRODUCT_ID){
         this.CASE_ID = CASE_ID;
     }
-
     public void setCASE_DESC(String CASE_DESC){
         this.CASE_DESC = CASE_DESC;
     }
     public String getCASE_DESC(){
         return CASE_DESC;
     }
-
     public void setCASE_STATUS(String STATUS){
         this.STATUS = STATUS;
     }
@@ -117,9 +85,14 @@ public class Cases{
     public void setCASE_HOURS(int CASE_HOURS){
         this.CASE_HOURS = CASE_HOURS;
     }
-
     public int getCASE_HOURS(){
         return CASE_HOURS;
+    }
+   public void setMEMBER_ID(int MEMBER_ID){
+        this.MEMBER_ID = MEMBER_ID;
+   }
+    public int getMEMBER_ID(){
+        return MEMBER_ID;
     }
 
 }
