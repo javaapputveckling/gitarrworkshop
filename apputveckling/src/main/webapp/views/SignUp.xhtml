@@ -6,12 +6,21 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<f:view>
+
    <h:head>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+      <title>My Application</title>
+      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+      <link rel="stylesheet" href="#{request.contextPath}/assets/styles.css"/>
+      <link rel="stylesheet" href="#{request.contextPath}/assets/client.css"/>
+      <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
+      <script type="text/javascript" src="https://www.google.com/jsapi"> </script><!-- Google Charts -->
+      <script src="#{request.contextPath}/resources/js/statistics.js" type=""> </script>
+      <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
    </h:head>
 
    <h:body>
+
+      <ui:include src="../includes/client_inc/nav_client.xhtml"/>
       <h1>Sign up page</h1>
 
       <div class="container min-vh-100 min-vw-100 d-flex justify-content-center align-items-center">
@@ -31,25 +40,24 @@
          <h:outputLabel for="txtpassagain">
             <h:outputText value="Enter Password again"> </h:outputText>
          </h:outputLabel>
-         <h:inputText id="txtpassagain" value="#{signup.password2}" styleClass="form-control mb-2" required="true"> </h:inputText>
+         <h:inputText id="txtpassagain" value="#{signup.password2}" styleClass="form-control mb-2" required="true"/>
 
          <h:outputLabel for="txtemail">
             <h:outputText value="Enter Email"> </h:outputText>
          </h:outputLabel>
-         <h:inputText id="txtemail" value="#{signup.email}" styleClass="form-control mb-2" required="true"> </h:inputText>
+         <h:inputText id="txtemail" value="#{signup.email}" styleClass="form-control mb-2" required="true"/>
 
          <h:outputLabel for="txtphone">
             <h:outputText value="Enter Phonneumber"> </h:outputText>
          </h:outputLabel>
-         <h:inputText id="txtphone" value="#{signup.phone}" styleClass="form-control mb-2" required="true"> </h:inputText>
+         <h:inputText id="txtphone" value="#{signup.phone}" styleClass="form-control mb-2" required="true"/>
          <p>Allready a member? <a href="LogIn.xhtml">Sign in</a></p>
 
-         <h:commandButton id="cmdInsert" value="Create account" action="#{signup.add()}"> </h:commandButton>
+         <h:commandButton id="cmdInsert" value="Create account" action="#{signup.add}"/>
       </h:form>
 
       </div>
-
+      <ui:include src="../includes/client_inc/footer.xhtml"/>
    </h:body>
-</f:view>
 
 </html>

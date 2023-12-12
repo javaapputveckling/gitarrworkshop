@@ -45,7 +45,7 @@
                         <p>Model: #{item.PRODUCT_YEAR}</p>
                         <h3>Price: #{item.PRODUCT_PRICE}$</h3>
                         <h:form styleClass="m-5">
-                            <h:commandButton style="float: right" value="Reserve" class="btn btn-dark"/>
+                            <h:commandButton style="float: right" value="Reserve" styleClass="btn btn-dark" action="#{navigationBean.goToClientReserve()}"/>
                         </h:form>
                     </div>
 

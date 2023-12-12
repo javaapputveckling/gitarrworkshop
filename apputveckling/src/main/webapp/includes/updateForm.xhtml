@@ -1,0 +1,57 @@
+<div style="display: #{productBean.isShowProductDetails ? 'block' : 'none'}" class="m-5"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+     xmlns:ui="http://java.sun.com/jsf/facelets">
+    <div class="card">
+        <p class="card-header">Produkt</p>
+        <div class="card-body">
+            <h:form enctype="multipart/form-data">
+                <ui:repeat value="#{productBean.productsDetails}" var="item">
+                    <div class="row">
+                        <div class="col-9 col-first">
+                            <h:outputLabel name="Namn" styleClass="form-label">Produktnamn</h:outputLabel><br/>
+                            <h:inputText name="Name" required="true" value="#{item.PRODUCT_NAME}" requiredMessage="hej"
+                                         class="form-control"/>
+                            <h:message for="Name" styleClass="text-danger"/>
+                        </div>
+                        <br/>
+                        <div class="col-3 col-last">
+                            <h:outputLabel name="Pris" styleClass="form-label">pris</h:outputLabel>
+                            <br/>
+                            <h:inputText converter="jakarta.faces.Number" class="form-control" name="Pris" value="#{item.PRODUCT_PRICE}"/>
+                        </div>
+                    </div>
+                    <br/>'
+                    <div class="row">
+                        <div class="col-3 col-first">
+                            <h:outputLabel name="Modellår" styleClass="form-label">Modellår</h:outputLabel>
+                            <br/>
+                            <h:inputText converter="jakarta.faces.Number" name="Modellår"  class="form-control" value="#{item.PRODUCT_YEAR}"/>
+                            <br/></div>
+                        <div class="col-9">
+                            <h:outputLabel name="Main beskrivning" styleClass="form-label">Huvudbeskrivning</h:outputLabel>
+                            <br/>
+                            <h:inputTextarea name="Main beskrivning" rows="5" cols="30" class="form-control" required="true"
+                                             value="#{item.PRODUCT_MAIN_DESC}"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <h:outputLabel name="Produkt historia" styleClass="form-label">Produkthistorik</h:outputLabel>
+                    <br/>
+                    <h:inputTextarea name="Produkt historia" rows="5" cols="30" class="form-control" required="true"
+                                     value="#{item.PRODUCT_HISTORY_DESC}"/>
+                    <br/>
+
+                    <h:outputLabel name="Produktbild" styleClass="form-label">Produktbild</h:outputLabel>
+                    <br/>
+                    <h:inputFile name="Produktbild" value="#{productBean.imageFile}" class="form-control" multiple="true"/>
+                    <br/>
+                    <h:commandButton type="submit" value="Uppdatera produkt" styleClass="ui-button ui-button-success"
+                                     action="#{productBean.updateProduct(item.PRODUCT_ID)}"/>
+                </ui:repeat>
+            </h:form>
+        </div>
+    </div>
+</div>

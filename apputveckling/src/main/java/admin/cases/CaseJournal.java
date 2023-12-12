@@ -7,8 +7,6 @@ import jakarta.persistence.*;
 @Table(name = "CASE_JOURNAL")
 
 public class CaseJournal{
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int JOURNAL_ID;
@@ -17,9 +15,7 @@ public class CaseJournal{
     private Cases aCase;
     @Column(name = "JOURNAL_DESC")
     private String JOURNAL_DESC;
-
     public CaseJournal(){
-
     }
     public void setJOURNAL_ID(int JOURNAL_ID){
         this.JOURNAL_ID = JOURNAL_ID;
@@ -27,7 +23,6 @@ public class CaseJournal{
     public int getJOURNAL_ID(){
         return JOURNAL_ID;
     }
-
     public void setaCase(Cases aCase){
         this.aCase = aCase;
     }

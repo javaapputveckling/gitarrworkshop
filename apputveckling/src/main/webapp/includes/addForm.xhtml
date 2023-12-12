@@ -1,31 +1,50 @@
-<div class="container-fluid" xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:ui="http://java.sun.com/jsf/composite"
+<div style="display: #{productBean.showForm eq 'true' ? 'block' : 'none'}" class="m-5" xmlns="http://www.w3.org/1999/xhtml"
 xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <div class="">
+    <div class="card">
+        <p class="card-header">Ny guitarr</p>
+        <div class="card-body">
         <h:form enctype="multipart/form-data">
-            <h:outputLabel name="Namn">Produktnamn</h:outputLabel><br/>
-            <h:inputText name="Name" required="true" value="#{productBean.newProduct.PRODUCT_NAME}"/>
-            <h:message for="Name" styleClass="text-danger"/><br/>
-
-
-            <h:outputLabel name="Pris">pris</h:outputLabel><br/>
-            <h:inputText name="Pris" required="true" value="#{productBean.newProduct.PRODUCT_PRICE}"/><br/>
-            <h:outputLabel name="Modellår">Modelår</h:outputLabel><br/>
-            <h:inputText  name="Modellår" required="true" value="#{productBean.newProduct.PRODUCT_YEAR}"/>
-
-            <h:outputLabel name="Main beskrivning">Huvudbeskrivning</h:outputLabel><br/>
-            <h:inputTextarea name="Main beskrivning" required="true" value="#{productBean.newProduct.PRODUCT_MAIN_DESC}"/>
+            <div class="row">
+                <div class="col-9 col-first">
+                    <h:outputLabel name="Namn" styleClass="form-label" >Produktnamn</h:outputLabel><br/>
+                    <h:inputText name="Name" required="true" value="#{productBean.newProduct.PRODUCT_NAME}" requiredMessage="hej" />
+                    <h:message for="Name" styleClass="text-danger" />
+                </div>
+                <br/>
+                <div class="col-3 col-last">
+                  <h:outputLabel name="Pris" styleClass="form-label">pris</h:outputLabel>
+                  <br/>
+                    <h:inputText converter="jakarta.faces.Number" class="form-control" name="Pris" required="true" value="#{productBean.newProduct.PRODUCT_PRICE}"/>
+                     <br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 col-first">
+                     <h:outputLabel  name="Modellår" styleClass="form-label">Modellår</h:outputLabel>
+                     <br/>
+                     <h:inputText converter="jakarta.faces.Number"  class="form-control" name="Modellår" required="true" value="#{productBean.newProduct.PRODUCT_YEAR}"/>
+                     <br/>
+                </div>
+                    <div class="col-9">
+                     <h:outputLabel name="Main beskrivning" styleClass="form-label">Huvudbeskrivning</h:outputLabel>
+                    <br/>
+                    <h:inputTextarea name="Main beskrivning" class="form-control" required="true" value="#{productBean.newProduct.PRODUCT_MAIN_DESC}"/>
+                    <br/>
+                    </div>
+            </div>
             <br/>
+            <div class="row">
+               <h:outputLabel name="Produkt historia" styleClass="form-label">Produkthistorik</h:outputLabel>
+                <br/>
+                <h:inputTextarea name="Produkt historia" class="form-control" required="true" value="#{productBean.newProduct.PRODUCT_HISTORY_DESC}"/>
+                <br/>
+            </div>
+            <h:outputLabel name="Produktbild" styleClass="form-label">Produktbild</h:outputLabel>
             <br/>
-            <h:outputLabel name="Produkt historia">Produkthistorik</h:outputLabel><br/>
-            <h:inputTextarea name="Produkt historia" required="true" value="#{productBean.newProduct.PRODUCT_HISTORY_DESC}"/>
+            <h:inputFile  name="Produktbild" class="form-control" value="#{productBean.imageFile}" multiple="true" required="true" />
             <br/>
-            <h:outputLabel name="Produktbild">Produktbild</h:outputLabel><br/>
-            <h:inputFile  name="Produktbild" value="#{productBean.imageFile}"/>
-            <br/>
-
-            <h:commandButton type="submit" value="Ladda upp" action="#{productBean.addProduct()}"/>
+            <h:commandButton type="submit" value="Ladda upp" action="#{productBean.addProduct()}" />
         </h:form>
+        </div>
     </div>
-
 </div>

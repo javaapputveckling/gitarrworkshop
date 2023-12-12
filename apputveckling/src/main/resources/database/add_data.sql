@@ -62,4 +62,12 @@ INSERT INTO JOURNAL_IMG (IMG_ID, JOURNAL_ID, IMG_PATH_STRING)
 VALUES (1, 1, '../src/main/webapp/assets/journal_entry_a.jpg'),
        (2, 2, '../src/main/webapp/assets/journal_entry_b.jpg');
 
+-- Insert data into APPOINTMENT table
+INSERT INTO ProjectDB.Events (title, start_date, end_date, all_day)
+VALUES ('Reservation', '2024-01-01 10:00:00', '2024-01-01 11:00:00', 0);
 
+INSERT INTO ProjectDB.Events (title, start_date, end_date, all_day)
+VALUES ('Reparation', '2024-01-01 14:30:00', '2024-01-01 15:30:00', 0);
+
+INSERT INTO ProjectDB.Events (title, start_date, end_date, all_day)
+VALUES ('Reparation', '2024-01-03 16:45:00', '2024-01-03 17:00:00', 0);

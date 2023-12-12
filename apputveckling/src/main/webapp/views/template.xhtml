@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
+<h:head>
     <title>My Application</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="#{request.contextPath}/assets/styles.css"/>
@@ -24,19 +24,19 @@
     </script>
     <!-- This previous code didn't import the bootstrap js bundle successfully:
     <h:outputScript library="js" name="bootstrap.bundle.min.js" target="head"/> -->
-</head>
+</h:head>
 <body>
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar for desktop -->
-        <div class="col-md-3 d-none d-md-block bg-dark text-white vh-100 position-sticky" style="top: 0; width: 150px;">
+        <div class="col-md-1 d-none d-md-block bg-dark text-white vh-100 position-sticky" style="top: 0;">
             <div class="d-flex flex-column h-100 p-2">
                 <ui:include src="nav-items.xhtml"/>
             </div>
         </div>
 
         <!-- Content area -->
-        <div class="col-md-9 col-12">
+        <div class="col-md-11">
             <!-- Hamburger button for mobile -->
             <div class="d-md-none">
                 <button class="btn btn-light text-dark border border-secondary m-2" type="button"

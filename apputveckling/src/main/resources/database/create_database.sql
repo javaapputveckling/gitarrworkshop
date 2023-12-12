@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS CLIENT
     CLIENT_NAME  VARCHAR(255),
     CLIENT_PHONE VARCHAR(20),
     CLIENT_EMAIL VARCHAR(255),
-    PASSWORD VARCHAR(200),
+    PASSWORD     VARCHAR(200),
     CLIENT_DATE  DATE
 );
 
@@ -67,4 +67,17 @@ CREATE TABLE IF NOT EXISTS JOURNAL_IMG
     FOREIGN KEY (JOURNAL_ID) REFERENCES CASE_JOURNAL (JOURNAL_ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
+-- Event table for calendar
+create table if not exists Events
+(
+    id          int auto_increment
+        primary key,
+    client_name varchar(255) null,
+    url         varchar(250) null,
+    email       varchar(250) null,
+    title       varchar(255) not null,
+    description text         null,
+    start_date  timestamp    null,
+    end_date    timestamp    null,
+    all_day     tinyint(1)   not null
+);
