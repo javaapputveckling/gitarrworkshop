@@ -19,7 +19,7 @@
             />
          </h:form>
          <h:form>
-            <h:commandButton action="/views/client/clientcase.xhtml"
+            <h:commandButton action="#{casesBean.getClientCases(signup.userId)}"
                              styleClass="#{navigationBean.selectedSection eq 'Reserve' ? 'nav-link nav-item p-3 myactive':'nav-link nav-item p-3'}"
                              value="My appointments"
             />

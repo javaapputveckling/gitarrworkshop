@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="apputveckling:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6bdd6f74-080e-4dcf-ada2-49887935e22d" name="Changes" comment="Sign up och Case_journal table fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/java/admin/cases/CasesBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/java/admin/cases/CasesBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/client/clientcase.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/client/clientcase.xhtml" afterDir="false" />
+    </list>
+    <list id="baad6780-71dd-47dd-885f-6f18ff24af96" name="Changes by nasiralizade" comment="Changes by nasiralizade">
+      <change beforePath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_cases.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/apputveckling/src/main/webapp/views/admin_cases.xhtml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="PROTOTYPE_3" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="client-page" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2ZP3xFRmZyPiRAzC21l0WfxtKD9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.DB.executor": "Run",
+    "Application.Signup.executor": "Run",
+    "Database Script.add_data.sql.executor": "Run",
+    "Database Script.create_database.sql.executor": "Run",
+    "Database Script.drop_database.sql.executor": "Run",
+    "GlassFish Server.GlassFish 6.9.0.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Cases__3",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "AtomSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ],
+    "RunConfigurationTargetLRU": [
+      "c57738b8-81ca-4bd9-8e0f-e2b5ef8e9e47"
+    ],
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/": [
+      "MySQL"
+    ]
+  }
+}]]></component>
+  <component name="RunManager" selected="GlassFish Server.GlassFish 6.9.0">
+    <configuration name="DB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="admin.DB.DB" />
+      <module name="apputveckling" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="admin.DB.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Signup" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="admin.login.Signup" />
+      <module name="apputveckling" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="admin.login.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="add_data.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/apputveckling/src/main/resources/database/add_data.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="c57738b8-81ca-4bd9-8e0f-e2b5ef8e9e47" />
+      <method v="2" />
+    </configuration>
+    <configuration name="create_database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/apputveckling/src/main/resources/database/create_database.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="c57738b8-81ca-4bd9-8e0f-e2b5ef8e9e47" />
+      <method v="2" />
+    </configuration>
+    <configuration name="drop_database.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/apputveckling/src/main/resources/database/drop_database.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="c57738b8-81ca-4bd9-8e0f-e2b5ef8e9e47" namespace="schema/&quot;ProjectDB&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="GlassFish 6.9.0" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 6.9.0" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="BROWSER_ID" value="e5120d43-2c3f-47ef-9f26-65e539e05186" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="apputveckling:war exploded">
+          <settings />
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="DOMAIN" value="domain1" />
+        <option name="PRESERVE" value="false" />
+        <option name="COMPATIBILITY" value="false" />
+        <option name="VIRTUAL_SERVER" />
+        <option name="USERNAME" value="admin" />
+        <option name="CREDENTIAL_ALIAS" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="GlassFish" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="9009" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="apputveckling:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.DB" />
+      <item itemvalue="Application.Signup" />
+      <item itemvalue="Database Script.add_data.sql" />
+      <item itemvalue="Database Script.create_database.sql" />
+      <item itemvalue="Database Script.drop_database.sql" />
+      <item itemvalue="GlassFish Server.GlassFish 6.9.0" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Database Script.drop_database.sql" />
+        <item itemvalue="Database Script.create_database.sql" />
+        <item itemvalue="Database Script.add_data.sql" />
+        <item itemvalue="Application.Signup" />
+        <item itemvalue="Application.DB" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-3183f394aec4-5f3ff201" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6bdd6f74-080e-4dcf-ada2-49887935e22d" name="Changes" comment="" />
+      <created>1702310131749</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702310131749</updated>
+      <workItem from="1702310133654" duration="6489000" />
+      <workItem from="1702318460530" duration="623000" />
+      <workItem from="1702382276673" duration="215000" />
+      <workItem from="1702382565616" duration="580000" />
+      <workItem from="1702476712479" duration="279000" />
+      <workItem from="1702476994539" duration="60000" />
+      <workItem from="1702477056544" duration="4676000" />
+      <workItem from="1702481751787" duration="72000" />
+      <workItem from="1702481885790" duration="20290000" />
+      <workItem from="1702550786931" duration="2580000" />
+      <workItem from="1702555736009" duration="222000" />
+      <workItem from="1702555975115" duration="128000" />
+      <workItem from="1702556310773" duration="49000" />
+      <workItem from="1702559044646" duration="2637000" />
+      <workItem from="1702561708550" duration="12770000" />
+    </task>
+    <task id="LOCAL-00001" summary="Connection between Cases and Client fixed.">
+      <option name="closed" value="true" />
+      <created>1702314822510</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1702314822510</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Changed member id to member_email in addCase function">
+      <option name="closed" value="true" />
+      <created>1702478811751</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1702478811751</updated>
+    </task>
+    <task id="LOCAL-00003" summary="style changes to the add function pop up">
+      <option name="closed" value="true" />
+      <created>1702478951816</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702478951816</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Bug fixed when adding a case without a clientId by disabling the add button if the client_email field is empty.">
+      <option name="closed" value="true" />
+      <created>1702489670889</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702489670889</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Style changes in addCase">
+      <option name="closed" value="true" />
+      <created>1702490522454</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1702490522454</updated>
+    </task>
+    <task id="LOCAL-00006" summary="addCase checks if the Client exists before proceeding to avoid crashing">
+      <option name="closed" value="true" />
+      <created>1702491910497</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1702491910497</updated>
+    </task>
+    <task id="LOCAL-00007" summary="case end date sets automatically when the user changes the case status to closed">
+      <option name="closed" value="true" />
+      <created>1702492533875</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1702492533875</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Some bugs fixed like the add pop up closing if the email does not exist">
+      <option name="closed" value="true" />
+      <created>1702496397242</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1702496397242</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Bug fixed in add Case function where you cant add new cases">
+      <option name="closed" value="true" />
+      <created>1702502530091</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1702502530091</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Bug fixed in add Case function where you cant add new cases">
+      <option name="closed" value="true" />
+      <created>1702553857969</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1702553857969</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Sign up och Case_journal table fixed">
+      <option name="closed" value="true" />
+      <created>1702568905008</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1702568905008</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Connection between Cases and Client fixed." />
+    <MESSAGE value="Changed member id to member_email in addCase function" />
+    <MESSAGE value="style changes to the add function pop up" />
+    <MESSAGE value="button styling in admin_case with bootstrap" />
+    <MESSAGE value="Bug fixed when adding a case without a clientId by disabling the add button if the client_email field is empty." />
+    <MESSAGE value="Style changes in addCase" />
+    <MESSAGE value="addCase checks if the Client exists before proceeding to avoid crashing" />
+    <MESSAGE value="case end date sets automatically when the user changes the case status to closed" />
+    <MESSAGE value="Some bugs fixed like the add pop up closing if the email does not exist" />
+    <MESSAGE value="Bug fixed in add Case function where you cant add new cases" />
+    <MESSAGE value="Sign up och Case_journal table fixed" />
+    <MESSAGE value="Changes by nasiralizade" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by nasiralizade" />
+  </component>
+</project>

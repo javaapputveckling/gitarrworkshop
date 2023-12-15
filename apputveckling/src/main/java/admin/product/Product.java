@@ -3,6 +3,7 @@ package admin.product;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -32,9 +33,22 @@ public class Product {
 
     public Product() {
     }
+
+    /**
+     * this method is used to get the first image of the product
+     * @return the first image of the product
+     */
     public String getFirstImage(){
-        return productImages.get(0).getImgPathString();
+        if (!productImages.isEmpty()) { // check if the product has images
+            byte[] imgData = productImages.get(0).getImgData(); // get the first image
+            if (imgData != null) { // check if the image is not null
+                String base64Image = Base64.getEncoder().encodeToString(imgData); // convert the image to base64 string
+                return "data:image/jpeg;base64," + base64Image; // return the image as base64 string with the prefix
+            }
+        }
+        return null;
     }
+
 
     public List<ProductImages> getProductImages() {
         return productImages;

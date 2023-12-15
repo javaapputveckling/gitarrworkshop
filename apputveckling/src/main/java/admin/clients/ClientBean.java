@@ -123,8 +123,9 @@ public class ClientBean implements Serializable {
     }
 
     public String collectClientInfo(int clientID){
-
-        caseList.clear();
+        if(this.caseList != null){
+            caseList.clear();
+        }
 
         caseList = em.createQuery("select p from Cases p where p.MEMBER_ID = " + clientID +" ORDER BY p.CASE_DATE_START DESC", Cases.class)
                 .getResultList();
