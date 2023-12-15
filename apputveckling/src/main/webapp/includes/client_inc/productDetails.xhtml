@@ -21,7 +21,8 @@
                                            varStatus="status">
                                     <div class="carousel-item #{status.index eq 0 ? 'active' : ''}">
                                         <img style="max-height: 400px; cursor: pointer;"
-                                             src="#{request.contextPath}/resources/img/#{image.imgPathString}"
+                                             src="#{empty image.base64Image ?
+                                             '/apputveckling-1.0-SNAPSHOT/resources/img/image_error.png' : image.base64Image}"
                                              alt="#{item.PRODUCT_NAME}" class="d-block w-100 img-fluid"
                                              data-bs-toggle="modal" data-bs-target="#imageModal"/>
                                     </div>
@@ -45,7 +46,8 @@
                         <p>Model: #{item.PRODUCT_YEAR}</p>
                         <h3>Price: #{item.PRODUCT_PRICE}$</h3>
                         <h:form styleClass="m-5">
-                            <h:commandButton style="float: right" value="Reserve" styleClass="btn btn-dark" action="#{navigationBean.goToClientReserve()}"/>
+                            <h:commandButton style="float: right" value="Reserve" styleClass="btn btn-dark"
+                                             action="#{navigationBean.goToClientReserve()}"/>
                         </h:form>
                     </div>
 

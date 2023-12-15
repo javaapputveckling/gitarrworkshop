@@ -1,25 +1,37 @@
 <div id="" class="container" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
-     xmlns:f="http://xmlns.jcp.org/jsf/core">
+     xmlns:f="http://xmlns.jcp.org/jsf/core"
+     xmlns:p="http://primefaces.org/ui">
 
     <div class="container-fluid row menu">
-       <ui:repeat value="#{productBean.products}" var="item">
-        <div class="card" style="width: 20rem;">
-            <img src="../resources/img/#{item.firstImage}" class="card-img-top" alt="..."/>
-            <div class="card-body">
-                <h5 class="card-title">#{item.PRODUCT_NAME}</h5>
-                <p class="card-text">#{item.PRODUCT_MAIN_DESC}</p>
+        <h:form styleClass="d-flex justify-content-end">
+            <!-- Upload the first product images to the database. Only do this once. After doing this, it's necessary to
+            redeploy glassfish to refresh the cached images. When uploading files from the page manually, the images refresh
+              without needing to redeploy. -->
+            <h:commandButton styleClass="btn btn-danger" value="⚠️ Don't press"
+                             action="#{productImagesBean.firstTimeInsertion()}"/>
+        </h:form>
+        <ui:repeat value="#{productBean.products}" var="item">
+            <div class="card" style="width: 20rem;">
+                <img src="#{empty item.firstImage ? '/apputveckling-1.0-SNAPSHOT/resources/img/image_error.png' : item.firstImage}"
+                     class="card-img-top" alt="..."/>
+                <div class="card-body">
+                    <h5 class="card-title">#{item.PRODUCT_NAME}</h5>
+                    <p class="card-text">#{item.PRODUCT_MAIN_DESC}</p>
 
-                <h:form>
-                  <h:commandButton styleClass="btn btn-danger" value="Radera" action="#{productBean.deleteProduct(item.PRODUCT_ID)}"/>
-                    <h:commandButton styleClass=" btn btn-dark" value="Redigera produkt" action="#{productBean.showProductDetails(item.PRODUCT_ID)}">
-                    </h:commandButton>
-               </h:form>
+                    <h:form>
+                        <h:commandButton styleClass="btn btn-danger" value="Radera"
+                                         action="#{productBean.deleteProduct(item.PRODUCT_ID)}"/>
+                        <h:commandButton styleClass=" btn btn-dark" value="Redigera produkt"
+                                         action="#{productBean.showProductDetails(item.PRODUCT_ID)}">
+                        </h:commandButton>
+                    </h:form>
+                </div>
             </div>
-        </div>
-       </ui:repeat>
+        </ui:repeat>
 
     </div>
     <h:form>
-   <h:commandButton styleClass="btn btn-info" value="Lägg till produkt" action="#{productBean.changeShowForm()}"/>
+        <h:commandButton styleClass="btn btn-info" value="Lägg till produkt" action="#{productBean.changeShowForm()}"/>
     </h:form>
+    <p:growl id="message" sticky="false" life="3000" showDetail="true"/>
 </div>

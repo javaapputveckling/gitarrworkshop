@@ -1,13 +1,14 @@
 package admin.product;
 
-import jakarta.enterprise.context.RequestScoped;
+import com.mysql.cj.jdbc.exceptions.PacketTooBigException;
 import jakarta.enterprise.inject.Produces;
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.faces.context.Flash;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceException;
 import jakarta.servlet.http.Part;
 import jakarta.transaction.Transactional;
 
@@ -18,8 +19,6 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.logging.Logger;
-
 
 
 /**
@@ -158,10 +157,8 @@ public class ProductBean implements Serializable {
         try {
             for(Part image: imageFile) {
                 ProductImages productImages = new ProductImages();
-                String filename = image.getSubmittedFileName();
-                String path = productImages.getImgPathStringToSave();
-                saveImage(filename, path, image);
-                productImages.setImgPathString(filename);
+                byte[] imageData = image.getInputStream().readAllBytes();
+                productImages.setImgData(imageData);
                 productImages.setProduct(product);
                 product.getProductImages().add(productImages);
             }
@@ -213,13 +210,25 @@ public class ProductBean implements Serializable {
             showForm=false;
 
 
-        }catch (Exception e){
+        }catch (PersistenceException e) {
+            Throwable cause = e;
+            while(cause.getCause() != null && !(cause instanceof PacketTooBigException)) {
+                cause = cause.getCause();
+            }
+            if (cause instanceof PacketTooBigException) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Upload Error", "The size of the file selected is too large");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            } else {
+                throw e;
+            }
+        } catch (Exception e){
             throw e;
         }
 
     }
 
-    private void reload() {
+    public void reload() {
         products = entityManager.createQuery("SELECT p FROM Product p", Product.class).getResultList();
     }
 
@@ -242,4 +251,5 @@ public class ProductBean implements Serializable {
     public void changeShowForm(){
         this.showForm =! showForm;
     }
+
 }

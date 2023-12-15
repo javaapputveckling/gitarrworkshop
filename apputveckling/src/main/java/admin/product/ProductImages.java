@@ -17,8 +17,10 @@ public class ProductImages {
     @ManyToOne
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
-    @Column(name = "IMG_PATH_STRING")
-    private String imgPathString;
+
+    @Lob
+    @Column(name = "IMG_DATA")
+    private byte[] imgData;
 
 
     public int getPROD_IMG_ID() {
@@ -37,22 +39,20 @@ public class ProductImages {
         this.product = product;
     }
 
-    public void setImgPathString(String imgPathString) {
-        this.imgPathString = imgPathString;
+    public byte[] getImgData() {
+        return imgData;
     }
 
-    public String getImgPathString() {
-        return imgPathString;
+    public void setImgData(byte[] imgData) {
+        this.imgData = imgData;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getImgPathStringToSave() {
-        String webapp = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/");
-        return webapp+"../../src/main/webapp/img";
 
+    public String getBase64Image() {
+        if (imgData != null) {
+            String base64Image = java.util.Base64.getEncoder().encodeToString(imgData);
+            return "data:image/jpeg;base64," + base64Image;
+        }
+        return null;
     }
-
 }
