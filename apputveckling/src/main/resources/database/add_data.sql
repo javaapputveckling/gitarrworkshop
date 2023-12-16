@@ -36,10 +36,10 @@ VALUES (1, 1, 1, 'Open', '2023-01-10', '2023-01-20', 500.00, 'Project A descript
 
 
 -- Insert data into CASE_JOURNAL table
-INSERT INTO CASE_JOURNAL (JOURNAL_ID, CASE_ID, JOURNAL_DESC)
-VALUES (1, 1, 'Journal entry for Project A'),
-       (2, 2, 'Journal entry for Project B'),
-       (3,1, 'test add to Journal');
+INSERT INTO CASE_JOURNAL (JOURNAL_ID, CASE_ID, JOURNAL_DESC, IMG_DATA)
+VALUES (1, 1, 'Journal entry for Project A', '../src/main/webapp/assets/journal_entry_a.jpg'),
+       (2, 2, 'Journal entry for Project B','../src/main/webapp/assets/journal_entry_b.jpg'),
+       (3,1, 'test add to Journal', '');
 
 -- Insert data into PROD_IMG table (MOVED TO firstTimeInsertion() in ProductImagesBean.java)
 /*INSERT INTO PROD_IMG (PRODUCT_ID, IMG_PATH_STRING)
@@ -58,10 +58,6 @@ VALUES (1, 'BobMarley.JPG'),
        (7, 'IMG_1187.JPG');*/
 
 
--- Insert data into JOURNAL_IMG table
-INSERT INTO JOURNAL_IMG (IMG_ID, JOURNAL_ID, IMG_PATH_STRING)
-VALUES (1, 1, '../src/main/webapp/assets/journal_entry_a.jpg'),
-       (2, 2, '../src/main/webapp/assets/journal_entry_b.jpg');
 
 -- Insert data into APPOINTMENT table
 INSERT INTO ProjectDB.Events (title, start_date, end_date, all_day)

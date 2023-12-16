@@ -31,6 +31,7 @@ public class Cases{
     private List<Client> test = new ArrayList<>();*/
     @OneToMany(mappedBy = "aCase", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CaseJournal> caseJournals = new ArrayList<>();
+
     public List<CaseJournal> getCaseJournals() {
         return caseJournals;
     }

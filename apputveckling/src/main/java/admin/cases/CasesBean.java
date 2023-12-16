@@ -37,6 +37,7 @@ public class CasesBean implements Serializable {
     private String newCaseType;
     private String newJournalDesc;
     private String newMemberEmail;
+    private byte[] newmgData;
 
     public List<Cases> getCases_details() {
         return cases_details;
@@ -245,6 +246,7 @@ public class CasesBean implements Serializable {
         newCase.setMEMBER_ID(memberId);
 
         CaseJournal newJournal = new CaseJournal();
+        JournalImage newImage = new JournalImage();
         newJournal.setJOURNAL_DESC(newJournalDesc);
         newJournal.setaCase(newCase);
 

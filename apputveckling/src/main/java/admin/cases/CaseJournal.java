@@ -7,14 +7,18 @@ import jakarta.persistence.*;
 @Table(name = "CASE_JOURNAL")
 
 public class CaseJournal{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int JOURNAL_ID;
+
     @ManyToOne
     @JoinColumn(name = "CASE_ID")
     private Cases aCase;
+
     @Column(name = "JOURNAL_DESC")
     private String JOURNAL_DESC;
+    // Add this field to represent the image data
     public CaseJournal(){
     }
     public void setJOURNAL_ID(int JOURNAL_ID){
