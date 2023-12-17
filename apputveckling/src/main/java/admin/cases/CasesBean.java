@@ -8,12 +8,24 @@ import jakarta.inject.Named;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import org.primefaces.PrimeFaces;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import org.primefaces.model.file.UploadedFile;
+import org.primefaces.shaded.commons.io.FilenameUtils;
+import org.primefaces.util.IOUtils;
+
 
 @Named
 @Transactional
@@ -21,6 +33,7 @@ import java.util.Map;
 public class CasesBean implements Serializable {
     @Produces
     @PersistenceContext(unitName = "PRODUCT")
+
     private EntityManager entityManager;
     List<Cases> cases;
     List<Cases> client_cases;
@@ -28,6 +41,16 @@ public class CasesBean implements Serializable {
     Cases caseToEdit;
     int member_id;
     private String newCaseDesc;
+    private byte[] journalImageFile;
+
+    public byte[] getJournalImageFile() {
+        return journalImageFile;
+    }
+
+    public void setJournalImageFile(byte[] journalImageFile) {
+        this.journalImageFile = journalImageFile;
+    }
+
     private String newCaseStatus;
     private String newCaseDateStart;
     private String newCaseDateEnd;
@@ -37,7 +60,8 @@ public class CasesBean implements Serializable {
     private String newCaseType;
     private String newJournalDesc;
     private String newMemberEmail;
-    private byte[] newmgData;
+
+
 
     public List<Cases> getCases_details() {
         return cases_details;
@@ -160,17 +184,14 @@ public class CasesBean implements Serializable {
                 CaseJournal newJournal = new CaseJournal();
                 newJournal.setJOURNAL_DESC(newJournalDesc);
                 newJournal.setaCase(caseToEdit);
-
+                newJournal.setJournalImageBytes(journalImageFile);
                 caseToEdit.getCaseJournals().add(newJournal);
                 entityManager.persist(newJournal);
 
-                newJournalDesc = null; // Clear the input field after adding the journal
+                newJournalDesc = null;
 
-                // Hide the dialog
                 PrimeFaces.current().executeScript("PF('addjournal').hide();");
-
-                // Refresh the page
-                PrimeFaces.current().ajax().update(":myform"); // Replace "formId" with the actual ID of your form
+                PrimeFaces.current().ajax().update(":myform");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,7 +267,6 @@ public class CasesBean implements Serializable {
         newCase.setMEMBER_ID(memberId);
 
         CaseJournal newJournal = new CaseJournal();
-        JournalImage newImage = new JournalImage();
         newJournal.setJOURNAL_DESC(newJournalDesc);
         newJournal.setaCase(newCase);
 

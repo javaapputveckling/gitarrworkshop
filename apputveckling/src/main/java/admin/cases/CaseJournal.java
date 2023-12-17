@@ -18,7 +18,18 @@ public class CaseJournal{
 
     @Column(name = "JOURNAL_DESC")
     private String JOURNAL_DESC;
-    // Add this field to represent the image data
+    @Lob
+    @Column(name = "IMG_DATA")
+    private byte[] journalImageBytes;
+
+    public byte[] getJournalImageBytes() {
+        return journalImageBytes;
+    }
+
+    public void setJournalImageBytes(byte[] journalImageBytes) {
+        this.journalImageBytes = journalImageBytes;
+    }
+
     public CaseJournal(){
     }
     public void setJOURNAL_ID(int JOURNAL_ID){
