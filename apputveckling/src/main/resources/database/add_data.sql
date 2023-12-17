@@ -37,9 +37,9 @@ VALUES (1, 1, 1, 'Open', '2023-01-10', '2023-01-20', 500.00, 'Project A descript
 
 -- Insert data into CASE_JOURNAL table
 INSERT INTO CASE_JOURNAL (JOURNAL_ID, CASE_ID, JOURNAL_DESC, IMG_DATA)
-VALUES (1, 1, 'Journal entry for Project A', '../src/main/webapp/assets/journal_entry_a.jpg'),
-       (2, 2, 'Journal entry for Project B','../src/main/webapp/assets/journal_entry_b.jpg'),
-       (3,1, 'test add to Journal', '');
+VALUES (1, 1, 'Journal entry for Project A', null),
+       (2, 2, 'Journal entry for Project B',null),
+       (3,1, 'test add to Journal', null);
 
 -- Insert data into PROD_IMG table (MOVED TO firstTimeInsertion() in ProductImagesBean.java)
 /*INSERT INTO PROD_IMG (PRODUCT_ID, IMG_PATH_STRING)
