@@ -2,9 +2,12 @@ package admin.login;
 
 import admin.DB.DB;
 import admin.DB.SetDB;
+import admin.appointment.EventEntity;
 import admin.cases.Cases;
 import admin.cases.CasesBean;
+import admin.clients.Client;
 import com.sun.tools.javac.Main;
+import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
@@ -12,9 +15,11 @@ import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.persistence.EntityManager;
 import jakarta.security.enterprise.credential.Password;
 import jakarta.servlet.http.HttpSession;
 import jakarta.ws.rs.PUT;
+import jakarta.persistence.EntityManager;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -35,8 +40,15 @@ public class Signup implements Serializable {
     private String phone;
     private int id;
 
+    private HttpSession session;
+    private static boolean isSignedIn = false;
+
     public Signup() {
 
+    }
+
+    public static boolean isIsSignedIn() {
+        return isSignedIn;
     }
 
     public int getUserId() {
@@ -102,9 +114,10 @@ public class Signup implements Serializable {
     }
 
     public String LogIn() {
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
-        HttpSession session = (HttpSession) externalContext.getSession(true);
+        session = (HttpSession) externalContext.getSession(true);
 
         if (Objects.equals(name, "admin") && Objects.equals(password, databaseExample.GetPasswordByName("admin"))) {
             return "admin_home.xhtml";
@@ -113,13 +126,17 @@ public class Signup implements Serializable {
         if (Objects.equals(databaseExample.GetNameByName(name), name) && Objects.equals(databaseExample.GetPasswordByName(name), password)) {
             //return "/Login";
             session.setAttribute("username", name);
+            session.setAttribute("email", email);
             session.setAttribute("id", getId());
             this.userId = databaseExample.GetIdByName(name);
+
+
             //CasesBean ny=new CasesBean();
             //casesList=ny.getClientCases(id);
            // System.out.println(casesList);
             //return "/includes/loggedinpage";
-            return "client/inloggadhome";
+            isSignedIn = true;
+            return "client/ClientHome";
         }
         return "SignUp";
     }
@@ -180,7 +197,8 @@ public class Signup implements Serializable {
         }
 
         // Redirect to the login page or any other desired page after sign out
-        return "../LogIn.xhtml";
+        isSignedIn = false;
+        return "LogIn.xhtml";
     }
     public static void main(String [] args){
 

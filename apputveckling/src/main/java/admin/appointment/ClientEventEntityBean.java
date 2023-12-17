@@ -3,12 +3,14 @@ package admin.appointment;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.inject.Produces;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
@@ -108,6 +110,31 @@ public class ClientEventEntityBean implements Serializable {
         }
     }
 
+    public HttpSession checkLoginSession() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        return (HttpSession) externalContext.getSession(true);
+    }
+    public Object getDisplaySessionName() {
+        HttpSession session = checkLoginSession();
+        if (session == null) {
+            return "Enter your name";
+        }
+        else {
+            return session.getAttribute("username");
+        }
+    }
+    public Object getDisplaySessionEmail() {
+        HttpSession session = checkLoginSession();
+        if (session == null) {
+            return "Enter your email";
+        }
+        else {
+            return session.getAttribute("email");
+        }
+    }
+
+
     public ScheduleModel getModel() {
         return model;
     }
@@ -171,4 +198,5 @@ public class ClientEventEntityBean implements Serializable {
     public void setClient_name(String client_name) {
         this.client_name = client_name;
     }
+
 }
