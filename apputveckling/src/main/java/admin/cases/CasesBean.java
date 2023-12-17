@@ -11,9 +11,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -181,10 +179,10 @@ public class CasesBean implements Serializable {
     public void addNewCaseJournal() {
         try {
             if (caseToEdit != null) {
+                setJournalImageFile(journalImageFile);
                 CaseJournal newJournal = new CaseJournal();
                 newJournal.setJOURNAL_DESC(newJournalDesc);
                 newJournal.setaCase(caseToEdit);
-                newJournal.setJournalImageBytes(journalImageFile);
                 caseToEdit.getCaseJournals().add(newJournal);
                 entityManager.persist(newJournal);
 
@@ -220,7 +218,6 @@ public class CasesBean implements Serializable {
         cases = entityManager.createQuery("select p from Cases p", Cases.class).getResultList();
         return cases;
     }
-
     public String getClientCases(int member_id) {
         cases_details = entityManager.createQuery("select p from Cases p WHERE p.MEMBER_ID = :id", Cases.class)
                 .setParameter("id", member_id)
@@ -242,7 +239,6 @@ public class CasesBean implements Serializable {
         }
         return "/views/admin_cases?faces-redirect=true";
     }
-
     public void setCases(List<Cases> cases) {
         this.cases = cases;
     }
@@ -261,13 +257,13 @@ public class CasesBean implements Serializable {
         if (memberId == -1) {
             FacesMessage errorMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Client with email does not exist!", null);
             FacesContext.getCurrentInstance().addMessage("addCaseForm:errorMessages", errorMessage);
-            // Return null to stay on the same page (popup won't close)
             return null;
         }
         newCase.setMEMBER_ID(memberId);
 
         CaseJournal newJournal = new CaseJournal();
         newJournal.setJOURNAL_DESC(newJournalDesc);
+        newJournal.setJournalImageBytes(journalImageFile);
         newJournal.setaCase(newCase);
 
         newCase.getCaseJournals().add(newJournal);
@@ -288,7 +284,6 @@ public class CasesBean implements Serializable {
         newJournalDesc = null;
         return "admin_cases";
     }
-
     public String getStatusColor(String status) {
         Map<String, String> colorMap = new HashMap<>();
         colorMap.put("Done", "green");
@@ -297,8 +292,48 @@ public class CasesBean implements Serializable {
 
         return colorMap.getOrDefault(status, "transparent");
     }
-    public static void main(String[] args){
+    public void handleFileUpload(FileUploadEvent event) {
+        UploadedFile uploadedFile = event.getFile();
 
+        try {
+            journalImageFile = IOUtils.toByteArray(uploadedFile.getInputStream());
+
+            CaseJournal newJournal = new CaseJournal();
+            newJournal.setaCase(caseToEdit);
+            newJournal.setJournalImageBytes(journalImageFile);
+
+            entityManager.persist(newJournal);
+
+            System.out.println("File upload successful. Journal ID: " + newJournal.getJOURNAL_ID());
+
+            FacesMessage message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } catch (IOException e) {
+            System.err.println("Error uploading file: " + e.getMessage());
+            e.printStackTrace();
+
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error uploading file");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }
+    public static void main(String[] args){
+   /*     byte [] testimg;
+        File imageFile = new File("/Users/b/Documents/GitHub/gitarrworkshop/apputveckling/src/main/webapp/resources/img/BobMarley.JPG");
+        Cases test = new Cases();
+        CaseJournal test1 = new CaseJournal();
+        test1.setJOURNAL_DESC("tetst test");
+        test1.setJOURNAL_ID(50);
+        test.setCASE_ID(80);
+        test.setMEMBER_ID(20);
+        CasesBean test4 = new CasesBean();
+        test4.handleFileUpload();
+        test4.setNewJournalDesc(test1.getJOURNAL_DESC());
+        test4.setNewJournalDesc(test1.getJOURNAL_DESC());
+        test4.setJournalImageFile(test1.getJournalImageBytes());
+        test4.setNewMemberId(test.getMEMBER_ID());
+        test4.setNewMemberEmail("Bashar@example.com");
+        test4.addCase();
+        */
     }
 }
 

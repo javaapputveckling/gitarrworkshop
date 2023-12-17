@@ -22,13 +22,6 @@ public class CaseJournal{
     @Column(name = "IMG_DATA")
     private byte[] journalImageBytes;
 
-    public byte[] getJournalImageBytes() {
-        return journalImageBytes;
-    }
-
-    public void setJournalImageBytes(byte[] journalImageBytes) {
-        this.journalImageBytes = journalImageBytes;
-    }
 
     public CaseJournal(){
     }
@@ -49,6 +42,19 @@ public class CaseJournal{
     }
     public String getJOURNAL_DESC(){
         return JOURNAL_DESC;
+    }
+    public byte[] getJournalImageBytes() {
+        return journalImageBytes;
+    }
+    public void setJournalImageBytes(byte[] journalImageBytes) {
+        this.journalImageBytes = journalImageBytes;
+    }
+    public String getBase64Image() {
+        if (journalImageBytes != null) {
+            String base64Image = java.util.Base64.getEncoder().encodeToString(journalImageBytes);
+            return "data:image/jpeg;base64," + base64Image;
+        }
+        return null;
     }
 
 }

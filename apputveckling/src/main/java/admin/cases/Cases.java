@@ -43,7 +43,7 @@ public class Cases{
     public int getCASE_ID(){
         return CASE_ID;
     }
-    public void setCASE_ID(int PRODUCT_ID){
+    public void setCASE_ID(int CASE_ID){
         this.CASE_ID = CASE_ID;
     }
     public void setCASE_DESC(String CASE_DESC){
@@ -94,5 +94,7 @@ public class Cases{
     public int getMEMBER_ID(){
         return MEMBER_ID;
     }
+
+
 
 }

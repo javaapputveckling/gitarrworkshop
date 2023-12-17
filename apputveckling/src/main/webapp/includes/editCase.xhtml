@@ -44,7 +44,11 @@
                 <h:outputLabel for="casejournal" value="Case Journal With id #{caseJournal.JOURNAL_ID}:" class="d-block font-weight-bold mb-2" />
                 <h:inputTextarea id="casejournal" value="#{caseJournal.JOURNAL_DESC}" rows="5" cols="50" class="form-control mb-2" />
                 <h:outputLabel for="journalImage" value="Journal Image:" />
-                <p:fileUpload id="journalImage" value="#{casesBean.journalImageFile}" mode="simple" update=":myform" />
+                <p:fileUpload id="journalImage"
+                              mode="advanced"
+                              fileUploadListener="#{casesBean.handleFileUpload}"
+                              update=":myform"
+                              auto="true" />
                 <p:outputPanel rendered="#{not empty caseJournal.journalImageBytes}">
                     <h:outputLabel value="Current Image:" />
                     <h:graphicImage value="#{caseJournal.journalImageBytes}" width="100" height="100"/>
@@ -61,7 +65,11 @@
     <h:form>
         <p:outputLabel for="newJournalDesc" value="New Case Journal:" class="d-block font-weight-bold mb-2"/>
         <p:inputTextarea id="newJournalDesc" value="#{casesBean.newJournalDesc}" rows="5" cols="50" class="form-control mb-2"/>
-        <p:fileUpload id="newjournalImage" value="#{casesBean.journalImageFile}" mode="simple" update=":myform" />
+        <p:fileUpload id="newjournalImage"
+                      mode="advanced"
+                      fileUploadListener="#{casesBean.handleFileUpload}"
+                      update=":myform"
+                      auto="true" />
         <p:commandButton value="Save" action="#{casesBean.addNewCaseJournal()}" class="btn btn-success mb-2"/>
     </h:form>
 </p:dialog>
