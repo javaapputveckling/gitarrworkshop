@@ -7,10 +7,33 @@
     width: 30%;
     border-radius: 12px;
 }
+.custom-input{
+    margin-bottom: 1%;
+    width: 30%;
+    border-radius: 12px;
+}
+.custom-button{
+    position: relative;
+    margin-left: 1%;
+    width: 8%;
+    background-color:dodgerblue;
+    border-radius: 12px;
+    color: white;
+    border: none;
+
+}
+.customer_info{
+    margin-left: 1%;
+    margin-top: 5%;
+    background-color: lightgray;
+    padding: 2%;
+    border-radius: 12px;
+    box-shadow: 2px 2px 5px #808080; ;
+
+}
 
 .Medlemmar{
-    position: absolute;
-    width: 90%;
+
     top: 50%;
     height: 5%;
 }
@@ -19,7 +42,9 @@
     max-height: 200px;
     overflow-y: auto;
 
-
+}
+#link_styl:hover{
+    background-color: lightblue;
 }
 .history_list{
     position: relative;
@@ -27,6 +52,7 @@
     overflow-y: auto;
 
 }
+
 .add_button {
     position: relative;
     left: 35%;
@@ -40,19 +66,16 @@
 
 .history_div{
 
-    position: absolute;
     margin-top: 2%;
     padding: 2%;
     right: 6%;
     top: 5%;
-    width: 80%;
     height: 45%;
     border-radius: 25px;
     box-shadow: 2px 2px 5px #808080;
 
 
 }
-
 
 .card-img-top{
     max-width: 300px;
@@ -73,3 +96,24 @@
     margin: auto;
 }
 
+.calendar-content-cust {
+    text-align: center;
+    margin: auto;
+}
+
+.calendar-flex-col1-cust {
+    width: 25%;
+}
+.calendar-flex-col2-cust {
+    width: 50%;
+}
+.client-calendar-selectTimeDiv {
+    width: 100%;
+}
+
+.client-calendar-selectDayEvents {
+    border-radius: 5px;
+    background-color: darkgreen;
+    text-align: center;
+    padding-top: 2px;
+}

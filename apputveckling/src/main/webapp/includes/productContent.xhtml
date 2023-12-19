@@ -1,31 +1,52 @@
-<div id="menu" class="container">
+<div id="" class="container" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:f="http://xmlns.jcp.org/jsf/core"
+     xmlns:p="http://primefaces.org/ui">
 
-   <div class="container-fluid row menu">
-      <div class="card" style="width: 25rem;">
-         <img src="../resources/img/guitar3.webp" class="card-img-top" alt="..."></img>
-         <div class="card-body">
-            <h5 class="card-title">bob marleys guitarr</h5>
-            <p class="card-text">spelad av bob marley</p>
-            <a href="" class="location link btn btn-dark">redigera inlägg</a>
-         </div>
-      </div>
-      <div class="card" style="width: 25rem;">
-         <img src="../resources/img/guitar1.webp" class="card-img-top" alt="..."></img>
-         <div class="card-body">
-            <h5 class="card-title">trä guitarr</h5>
-            <p class="card-text">hög kvalite från 1900</p>
-            <a  href="" class="location-link btn btn-dark">redigera inlägg</a>
-         </div>
-      </div>
+    <div class="container-fluid row menu">
+        <h:form styleClass="d-flex justify-content-end">
+            <!-- Upload the first product images to the database. Only do this once. After doing this, it's necessary to
+            redeploy glassfish to refresh the cached images. When uploading files from the page manually, the images refresh
+              without needing to redeploy. -->
+            <h:commandButton styleClass="btn btn-danger" value="⚠️ Don't press"
+                             action="#{productImagesBean.firstTimeInsertion()}"/>
+        </h:form>
+        <ui:repeat value="#{productBean.products}" var="item">
+            <div class="card" style="width: 20rem;">
+                <img src="#{empty item.firstImage ? '/apputveckling-1.0-SNAPSHOT/resources/img/image_error.png' : item.firstImage}"
+                     class="card-img-top" alt="..."/>
+                <div class="card-body">
+                    <h5 class="card-title">#{item.PRODUCT_NAME}</h5>
+                    <p class="card-text">#{item.PRODUCT_MAIN_DESC}</p>
 
-      <div class="card" style="width: 25rem;">
-         <img src="../resources/img/guitar2.webp" class="card-img-top" alt="something"></img>
-         <div class="card-body">
-            <h5 class="card-title">trä guitarr</h5>
-            <p class="card-text"> hög kvalite från 1788 </p>
-            <a  href="" class="location-link btn btn-dark">redigera inlägg</a>
-         </div>
-      </div>
+                    <h:form>
+                        <h:commandButton styleClass="btn btn-danger" value="Radera"
+                                         action="#{productBean.deleteProduct(item.PRODUCT_ID)}"/>
+                        <h:commandButton styleClass=" btn btn-dark" value="Redigera produkt"
+                                         action="#{productBean.showProductDetails(item.PRODUCT_ID)}">
+                        </h:commandButton>
+                    </h:form>
+                </div>
+            </div>
+        </ui:repeat>
 
-   </div>
+
+    </div>
+    <h:form>
+        <h:commandButton id="addButton" styleClass="btn btn-info" value="Lägg till produkt" action="#{productBean.changeShowForm()}" rendered="true" onclick="toggle_button(1)"/>
+    </h:form>
+    <p:growl id="message" sticky="false" life="3000" showDetail="true"/>
+
+    <script>
+        function toggle_button(hide) {
+            let button = document.getElementById("addButton");
+
+            if(hide === 1) {
+                button.style.display = "none";
+            }
+            else {
+                button.style.display = "block";
+            }
+        }
+    </script>
+
 </div>

@@ -1,8 +1,99 @@
-<div class="container-fluid" xmlns:h="http://java.sun.com/jsf/html">
-    <div class="row">
-        <div class="col-md-9 order-md-first">
-            <h1>Calendar</h1>
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Europe%2FLondon&amp;src=MzM4NDhmMzFhNTYyYjUyZTlhZThmOWVkODU4NmFiNmRjZmJiZmYyNGNhY2IyNTM3Y2RkNDhhZThhNmJjYzljOUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;src=c3Yuc3dlZGlzaCNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4uc3dlZGlzaCNob2xpZGF5QGdyb3VwLnYuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=MG1jcDNhNHYzdTVxYm12N3QxNnNxOGNuM2gydmkyaGZAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23009688&amp;color=%239E69AF&amp;color=%237986CB&amp;color=%230B8043&amp;color=%23F4511E" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"> </iframe>
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:h="http://xmlns.jcp.org/jsf/html"
+     xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>Schemaläggning</title>
+    </h:head>
+    <h:body>
+        <div class="container-fluid row">
+            <div class="col-md-9">
+                <h:form>
+                    <p:growl id="messages" showDetail="true" escape="false" noOpener="false"/>
+                    <p:schedule id="schedule" value="#{eventEntityBean.model}" widgetVar="myschedule"
+                                view="timeGridWeek" tooltip="true" resizable="true"
+                                disableWeekends="true" minTime="09:00:00" maxTime="19:00:00" showWeekNumbers="true"
+                                urlTarget="false">
+                        <p:ajax event="dateSelect" listener="#{eventEntityBean.onDateSelect}" update="eventDetails"
+                                oncomplete="PF('eventDialog').show();"/>
+                        <p:ajax event="eventSelect" listener="#{eventEntityBean.onEventSelect}" update="eventDetails"
+                                oncomplete="PF('eventDialog').show();"/>
+                        <p:ajax event="eventMove" listener="#{eventEntityBean.onEventMove}" update="messages"/>
+                    </p:schedule>
+
+                    <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="fade" hideEffect="fade" modal="true">
+                        <h:panelGrid id="eventDetails" columns="2" cellpadding="7">
+                            <p:outputLabel for="title" value="Titles" styleClass="font-bold"/>
+                            <p:inputText id="title" value="#{eventEntityBean.event.title}" required="true"/>
+
+                            <p:outputLabel for="from" value="From" styleClass="font-bold"/>
+                            <p:datePicker id="from" value="#{eventEntityBean.event.startDate}" pattern="yyyy/MM/dd"
+                                          timeInput="true"
+                                          showTime="true" appendTo="@(body)"/>
+
+                            <p:outputLabel for="to" value="To" styleClass="font-bold"/>
+                            <p:datePicker id="to" value="#{eventEntityBean.event.endDate}" pattern="yyyy/MM/dd"
+                                          timeInput="true"
+                                          showTime="true" appendTo="@(body)"/>
+
+                            <p:outputLabel for="email" value="Email" styleClass="font-bold"/>
+                            <p:inputText id="email" value="#{eventEntityBean.email}"/>
+
+                            <p:outputLabel for="client_name" value="First and last name" styleClass="font-bold"/>
+                            <p:inputText id="client_name" value="#{eventEntityBean.client_name}"/>
+
+                            <p:outputLabel for="url" value="URL" styleClass="font-bold"/>
+                            <p:inputText id="url" value="#{eventEntityBean.event.url}"/>
+
+                            <p:outputLabel for="description" value="Description" styleClass="font-bold"/>
+                            <p:inputTextarea id="description" value="#{eventEntityBean.event.description}" rows="3"
+                                             cols="30"/>
+
+                            <p:outputLabel for="allDay" value="All Day" styleClass="font-bold"/>
+                            <h:selectBooleanCheckbox id="allDay" value="#{eventEntityBean.event.allDay}"/>
+                        </h:panelGrid>
+
+                        <div class="flex justify-content-between mt-3">
+                            <p:commandButton type="reset" value="Reset" styleClass="font-bold ui-button-outlined"
+                                             ignoreAutoUpdate="false"/>
+                            <p:commandButton id="addButton" value="Save" icon="pi pi-save" action="#{eventEntityBean.addEvent}"
+                                             oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+                            <p:commandButton id="deleteBtn" type="delete" value="Delete"
+                                             style="float: right; background-color: red;"
+                                             styleClass="font-bold ui-button-danger " icon="pi pi-trash"
+                                             action="#{eventEntityBean.deleteEvent}"
+                                             oncomplete="PF('myschedule').update();P F('eventDialog').hide(); model.delete"/>
+
+                        </div>
+                    </p:dialog>
+                </h:form>
+            </div>
+            <div class="col-md-3">
+                <h:form>
+                    <h:panelGrid>
+                        <p:commandButton id="freeEventCreate" styleClass="ui-button ui-button-success"
+                                         value="Schemalägga möten" onclick="PF('freeTime').show()"
+                                         style="position: fixed; bottom: 20px; right: 20px; z-index: 1000"/>
+                    </h:panelGrid>
+                    <p:dialog header="Time Picker" widgetVar="freeTime" responsive="true" modal="true">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel for="dateFrom" value="From:" styleClass="font-bold"/>
+                            <p:datePicker id="dateFrom" value="#{eventEntityBean.time_from}" pattern="yyyy-MM-dd HH:mm"
+                                          required="true" timeInput="true" showTime="false"/>
+
+                            <p:outputLabel for="dateTo" value="To:" styleClass="font-bold"/>
+                            <p:datePicker id="dateTo" value="#{eventEntityBean.time_to}" pattern="yyyy-MM-dd HH:mm"
+                                          required="true" timeInput="true" showTime="false"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" style="margin-top: 10px; width: 100%;">
+                            <p:commandButton value="Cancel" onclick="PF('freeTime').hide()" type="button" styleClass="ui-button-secondary" style="width: 100%;"/>
+                            <p:commandButton value="Send" action="#{eventEntityBean.setAvailableEvents}"
+                                             oncomplete="PF('freeTime').hide()" style="width: 100%;"/>
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:form>
+            </div>
         </div>
-    </div>
+    </h:body>
 </div>

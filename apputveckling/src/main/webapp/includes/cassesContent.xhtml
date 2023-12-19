@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-   <title>Work Cases</title>
-   <style>
-      body {
-         -webkit-touch-callout: none;
-         -webkit-user-select: none;
-         -khtml-user-select: none;
-         -moz-user-select: none;
-         -ms-user-select: none;
-         user-select: none;
-      }
+<!DOCTYPE html [
+        <!ENTITY times "&#215;">
+        ]>
 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <title>Work Cases</title>
+   <p:messages id="errorMessages" showDetail="true" autoUpdate="true" closable="true" />
+   <style>
       .case {
          cursor: pointer;
          padding: 10px;
@@ -21,7 +21,6 @@
          border-radius: 10px;
          transition: background-color 0.3s ease;
       }
-
       .description {
          display: none;
          padding: 10px;
@@ -30,7 +29,9 @@
          transition: max-height 0.3s ease;
          overflow: hidden;
       }
-
+      .case_des{
+         display: none;
+      }
       .arrow {
          display: inline-block;
          margin-right: 5px;
@@ -40,14 +41,11 @@
          transform: rotate(45deg);
          transition: transform 0.3s ease;
       }
-
-
       .status-container {
          display: flex;
          align-items: center;
          margin-bottom: 10px;
       }
-
       .status-indicator {
          display: inline-block;
          width: 10px;
@@ -55,91 +53,203 @@
          border-radius: 50%;
          margin-right: 5px;
       }
-
-      .edit-button {
-         position: absolute;
-         top: 10px;
-         right: 10px;
-         cursor: pointer;
-         color: blue;
-         text-decoration: underline;
-      }
-
       .status-text {
          font-weight: bold;
       }
-
-      .status-done { background-color: green; }
-      .status-in-progress { background-color: yellow; }
-      .status-pending { background-color: rgb(128, 128, 128); }
       .search-filter-container{
          margin: 10px;
       }
+      .modal-content {
+         background-color: #fefefe;
+         padding: 40px;
+         border-radius: 10px;
+         max-width: 600px;
+         width: 80%;
+         margin: auto;
+         position: relative;
+      }
+      .add-case-container label {
+         display: block;
+         margin-bottom: 5px;
+      }
+      .add-case-container {
+         display: flex;
+         flex-direction: column;
+      }
+      .add-case-container button {
+         align-self: flex-end;
+         margin-top: 20px;
+      }
+      .edit-button {
+         position: absolute;
+         top: 5px;
+         right: 5px;
+         cursor: pointer;
+         color: #007bff;
+         text-decoration: underline;
+      }
    </style>
    <script>
+      function checkMemberEmail() {
+         var memberEmail = document.getElementById('addCaseForm:Client_email').value;
+         var addButton = document.getElementById('addCaseForm:addButton');
+
+         if (memberEmail.trim() === "") {
+            addButton.disabled = true;
+         } else {
+            addButton.disabled = false;
+         }
+      }
       function toggleDescription(caseId) {
          var description = document.getElementById("description_" + caseId);
          var arrow = document.getElementById("arrow_" + caseId);
+         var des_title = document.getElementById("case_des_" + caseId);
 
-         if (description.style.display === 'none') {
+         if (description.style.display === 'none' || description.style.display === '') {
             description.style.display = 'block';
+            des_title.style.display = 'block';
             arrow.style.transform = 'rotate(225deg)';
          } else {
             description.style.display = 'none';
+            des_title.style.display = 'none';
             arrow.style.transform = 'rotate(45deg)';
          }
       }
+      function collapseDescription(caseId) {
+         var description = document.getElementById("description_" + caseId);
+         var arrow = document.getElementById("arrow_" + caseId);
+         var des_title = document.getElementById("case_des_" + caseId);
 
-      function editCase(caseId) {
-         alert("Edit Case " + caseId);
+         description.style.display = 'none';
+         des_title.style.display = 'none';
+         arrow.style.transform = 'rotate(45deg)';
+      }
+      function showAddCaseModal() {
+         var modal = document.getElementById("addCaseModal");
+         modal.style.display = "block";
+      }
+      function closeAddCaseModal() {
+         var modal = document.getElementById("addCaseModal");
+         modal.style.display = "none";
+      }
+      function searchCase() {
+         var searchInput = document.getElementById("search_bar").value.toLowerCase();
+         var cases = document.querySelectorAll(".case");
+
+         cases.forEach(function (caseElement) {
+            var caseId = caseElement.getAttribute("data-case-id").toLowerCase();
+
+            if (caseId.includes(searchInput)) {
+               caseElement.style.display = "block";
+            } else {
+               caseElement.style.display = "none";
+            }
+         });
+      }
+      function filterCase() {
+         var statusFilter = document.getElementById("status_filter").value;
+         var typeFilter = document.getElementById("type_filter").value;
+         var cases = document.querySelectorAll(".case");
+
+         cases.forEach(function (caseElement) {
+            var caseStatus = caseElement.getAttribute("data-case-status").toLowerCase();
+            var caseType = caseElement.getAttribute("data-case-type").toLowerCase();
+
+            var matchStatus = statusFilter === "" || caseStatus === statusFilter.toLowerCase();
+            var matchType = typeFilter === "" || caseType === typeFilter.toLowerCase();
+
+            if (matchStatus &amp;&amp; matchType) {
+               caseElement.style.display = "block";
+            } else {
+               caseElement.style.display = "none";
+            }
+         });
+      }
+      function toggleFilterOptions() {
+         var filterOptions = document.getElementById("filterOptions");
+         filterOptions.style.display = (filterOptions.style.display === "none" || filterOptions.style.display === "") ? "block" : "none";
       }
    </script>
-</head>
-<body>
+</h:head>
+<h:body onload="checkMemberEmail()">
 <div class="search-filter-container">
-   <input type="text" class="search-input" placeholder="Search..."></input>
-   <button class="filter-button">Filter</button>
-   <button class="add-button">Add</button>
+   <input type="text" id="search_bar" placeholder="Search id..." oninput="searchCase()"/>
+   <button type="button" class="btn btn-primary" onclick="toggleFilterOptions()">Filter</button>
+   <button type="button" class="btn btn-primary" onclick="showAddCaseModal()">Add</button>
 </div>
+<div id="filterOptions" style="display: none;">
+   <select id="status_filter" onchange="filterCase()" class="form-control mb-2">
+      <option value="">All Status</option>
+      <option value="Done">Done</option>
+      <option value="Closed">Closed</option>
+      <option value="Open">Open</option>
+   </select>
+   <select id="type_filter" onchange="filterCase()" class="form-control mb-2">
+      <option value="">All Types</option>
+      <option value="Rented">Rented</option>
+      <option value="Repairment">Reperment</option>
+   </select>
+</div>
+<div id="addCaseModal" class="modal">
+   <div class="modal-content">
+      <span class="close" onclick="closeAddCaseModal()">&times;</span>
+      <h:form id="addCaseForm">
+         <div class="add-case-container">
+            <label for="status">Status:</label>
+            <h:selectOneMenu id="status" value="#{casesBean.newCaseStatus}" class="form-control mb-2">
+               <f:selectItem itemValue="Open" itemLabel="Open" />
+               <f:selectItem itemValue="Done" itemLabel="Done" />
+               <f:selectItem itemValue="Closed" itemLabel="Closed" />
+            </h:selectOneMenu>
+            <label for="type">Type:</label>
+            <h:selectOneMenu id="type" value="#{casesBean.newCaseType}" class="form-control mb-2">
+               <f:selectItem itemValue="Rented" itemLabel="Rented" />
+               <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
+            </h:selectOneMenu>
+            <label for="Client_email">Client Email:</label>
+            <h:inputText id="Client_email" value="#{casesBean.newMemberEmail}" placeholder="Client_Email*" onchange="checkMemberEmail()" oninput="checkMemberEmail()" class="form-control mb-2" />
+            <label for="description">Description:</label>
+            <h:inputTextarea id="description" value="#{casesBean.newCaseDesc}" placeholder="Description" class="form-control mb-2"  />
+            <label for="journalDesc">Journal Description:</label>
+            <h:inputTextarea id="journalDesc" value="#{casesBean.newJournalDesc}" placeholder="Case Journal Description" class="form-control mb-2"  />
+            <h:commandButton id="addButton" styleClass="btn btn-primary" value="Add" action="#{casesBean.addCase}" disabled="#{casesBean.newMemberId == -1}"></h:commandButton>
+         </div>
+      </h:form>
 
-<div class="case" onclick="toggleDescription(1)">
-   <div class="status-container">
-      <div class="status-indicator status-done"></div>
-      <span class="status-text">Status: Done</span>
-   </div>
-   <span id="arrow_1" class="arrow"></span>
-   <span class="case-number">Case Number: 1</span>
-   <div id="description_1" class="description">
-      Description for Case 1: Description here.
-      <span class="edit-button" onclick="editCase(1)">Edit</span>
    </div>
 </div>
-
-<div class="case" onclick="toggleDescription(2)">
-   <div class="status-container">
-      <div class="status-indicator status-in-progress"></div>
-      <span class="status-text">Status: In Progress</span>
+<c:forEach var="case" items="#{casesBean.cases}">
+   <div class="case" data-case-id="#{case.CASE_ID}" data-case-status="#{case.CASE_STATUS}" data-case-type="#{case.CASE_TYPE}" onclick="toggleDescription(#{case.CASE_ID})">
+      <div class="status-container">
+         <div class="status-indicator" style="background-color: #{casesBean.getStatusColor(case.CASE_STATUS)};"></div>
+         <span class="status-text">Status: #{case.CASE_STATUS}</span>
+      </div>
+      <span id="arrow_#{case.CASE_ID}" class="arrow"></span>
+      <span class="case-number" onclick="collapseDescription(#{case.CASE_ID})">Case #{case.CASE_ID}</span>
+      <div id="case_des_#{case.CASE_ID}" class="case_des">
+         <h:form>
+         <h:commandButton class = "edit-button" value="Edit" action="#{casesBean.editCase(case.CASE_ID)}"/>
+         </h:form>
+         Description for case: #{case.CASE_DESC}
+         <br />
+         Case Type: #{case.CASE_TYPE}
+         <br />
+         Case Start Date: #{case.CASE_DATE_START}
+         <br />
+         Case End Date: #{case.CASE_DATE_END}
+         <br />
+         Case Hours: #{case.CASE_HOURS}h
+         <br />
+         Case Profit: #{case.CASE_PROFIT}kr
+      </div>
+      <ui:repeat var="caseJournal" value="#{case.caseJournals}">
+         <div id="description_#{case.CASE_ID}" class="description" onclick="collapseDescription(#{case.CASE_ID})">
+            #{caseJournal.JOURNAL_DESC}
+            <h:form>
+            </h:form>
+         </div>
+      </ui:repeat>
    </div>
-   <span id="arrow_2" class="arrow"></span>
-   <span class="case-number">Case Number: 2</span>
-   <div id="description_2" class="description">
-      Description for Case 2: Description here.
-      <span class="edit-button" onclick="editCase(2)">Edit</span>
-   </div>
-</div>
-
-<div class="case" onclick="toggleDescription(3)">
-   <div class="status-container">
-      <div class="status-indicator status-pending"></div>
-      <span class="status-text">Status: Pending</span>
-   </div>
-   <span id="arrow_3" class="arrow"></span>
-   <span class="case-number">Case Number: 3</span>
-   <div id="description_3" class="description">
-      Description for Case 3: Description here.
-      <span class="edit-button" onclick="editCase(3)">Edit</span>
-   </div>
-</div>
-
-</body>
+</c:forEach>
+</h:body>
 </html>

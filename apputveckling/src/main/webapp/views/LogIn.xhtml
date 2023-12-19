@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>My Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="#{request.contextPath}/assets/client.css"/>
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="https://www.google.com/jsapi"> </script><!-- Google Charts -->
+    <script src="#{request.contextPath}/resources/js/statistics.js" type=""> </script>
+    <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
+</h:head>
+
+<h:body>
+<ui:include src="../includes/client_inc/nav_client.xhtml"/>
+    <h1>Sign in page</h1>
+    <div class="container min-vh-100 min-vw-100 d-flex justify-content-center align-items-center">
+
+        <h:form styleClass="border p-5">
+
+            <h:outputLabel for="txtName">
+                <h:outputText value="Användarnamn"> </h:outputText>
+            </h:outputLabel>
+            <h:inputText id="txtName" value="#{signup.name}" styleClass="form-control" required="true"> </h:inputText>
+
+            <br> </br>
+
+            <h:outputLabel for="txtpass">
+                <h:outputText value="Lösenord"> </h:outputText>
+            </h:outputLabel>
+            <h:inputText id="txtpass" value="#{signup.password}" styleClass="form-control me-5 "
+                         required="true"> </h:inputText>
+            <br> </br>
+
+            <p>Bli medlem här <a href="SignUp.xhtml">Registrera</a></p>
+            <h:commandButton id="cmdInsert" value="Logga in" action="#{signup.LogIn()}"/>
+        </h:form>
+
+    </div>
+    <ui:include src="../includes/client_inc/footer.xhtml"/>
+</h:body>
+</html>

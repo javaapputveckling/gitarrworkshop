@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Case Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></link>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</h:head>
+<h:body>
+    <h:form id="myform">
+        <div class="container mt-4">
+            <h2>Case Details</h2>
+            <label for="caseId" class="font-weight-bold mb-2"></label>
+            <h:outputLabel id="caseId" value="Case ID: #{casesBean.caseToEdit.CASE_ID}" class="d-block font-weight-bold mb-2" />
+            <label for="status" class="font-weight-bold mb-2">Case Status:</label>
+            <h:selectOneMenu id="status" value="#{casesBean.caseToEdit.CASE_STATUS}" class="form-control mb-2">
+                <f:selectItem itemValue="Done" itemLabel="Done" />
+                <f:selectItem itemValue="Closed" itemLabel="Closed" />
+                <f:selectItem itemValue="Open" itemLabel="Open" />
+            </h:selectOneMenu>
+
+            <label for="type" class="font-weight-bold mb-2">Case Type:</label>
+            <h:selectOneMenu id="type" value="#{casesBean.caseToEdit.CASE_TYPE}" class="form-control mb-2">
+                <f:selectItem itemValue="Rented" itemLabel="Rented" />
+                <f:selectItem itemValue="Repairment" itemLabel="Repairment" />
+            </h:selectOneMenu>
+            <h:outputLabel for="caseHours" value="Case Hours" class="d-block font-weight-bold mb-2" />
+            <h:inputText id="caseHours" value="#{casesBean.caseToEdit.CASE_HOURS}" class="form-control mb-2" />
+            <p:outputLabel for="caseProfit" value="Case Profit" class="d-block font-weight-bold mb-2" />
+            <p:inputText id="caseProfit" value="#{casesBean.caseToEdit.CASE_PROFIT}" class="form-control mb-2" required="true" />
+            <p:message for="caseProfit" />
+            <h:outputLabel for="caseDesc" value="Case Description:" class="d-block font-weight-bold mb-2" />
+            <h:inputTextarea id="caseDesc" value="#{casesBean.caseToEdit.CASE_DESC}" rows="5" cols="50" class="form-control mb-2" />
+            <ui:repeat var="caseJournal" value="#{casesBean.caseToEdit.caseJournals}">
+                <h:outputLabel for="casejournal" value="Case Journal With id #{caseJournal.JOURNAL_ID}:" class="d-block font-weight-bold mb-2" />
+                <h:inputTextarea id="casejournal" value="#{caseJournal.JOURNAL_DESC}" rows="5" cols="50" class="form-control mb-2" />
+            </ui:repeat>
+            <p:commandButton value="Go Back" styleClass="ui-button ui-button-secondary m-2" icon="pi pi-step-backward-alt" action="#{casesBean.goBack()}" />
+            <p:commandButton value="Save Changes" styleClass="ui-button ui-button-primary m-2" icon="pi pi-save"  action= "#{casesBean.updateCase(casesBean.caseToEdit.CASE_ID)}" update="caseProfit"/>
+            <p:commandButton styleClass="ui-button ui-button-primary m-2" icon="pi pi-plus"   value="Add New Case Journal"
+                             update=":addjournal" oncomplete="PF('addjournal').show()"/>
+        </div>
+    </h:form>
+<p:dialog id="addjournal" widgetVar="addjournal" modal="true" visible="false" header="Add new case journal">
+    <h:form>
+        <p:outputLabel for="newJournalDesc" value="New Case Journal:" class="d-block font-weight-bold mb-2"/>
+        <p:inputTextarea id="newJournalDesc" value="#{casesBean.newJournalDesc}" rows="5" cols="50" class="form-control mb-2"/>
+        <p:commandButton value="Save" action="#{casesBean.addNewCaseJournal()}" class="btn btn-success mb-2"/>
+    </h:form>
+</p:dialog>
+</h:body>
+</html>

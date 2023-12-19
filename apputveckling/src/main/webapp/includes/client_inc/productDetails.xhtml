@@ -1,0 +1,67 @@
+<div xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html">
+    <div class="#{productBean.isShowProductDetails eq 'true' ? ' m-5' : 'hidden'}">
+        <div class="card" style="text-align: left">
+            <ui:repeat value="#{productBean.productsDetails}" var="item" varStatus="status">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Bootstrap Carousel for Image Slider -->
+                        <div id="imageCarousel_#{status.index}" class="carousel slide" data-bs-ride="carousel" style="max-width: 400px">
+                            <div class="carousel-indicators">
+                                <ui:repeat value="#{item.productImages}" var="image"
+                                           varStatus="status">
+                                    <button type="button" data-bs-target="#imageCarousel"
+                                            data-bs-slide-to="#{status.index}"
+                                            class="#{status.index eq 0 ? 'active' : ''}"
+                                            aria-current="#{status.index eq 0 ? 'true' : 'false'}"
+                                            aria-label="Slide #{status.index}"/>
+                                </ui:repeat>
+                            </div>
+                            <div class="carousel-inner">
+                                <ui:repeat value="#{item.productImages}" var="image"
+                                           varStatus="status">
+                                    <div class="carousel-item #{status.index eq 0 ? 'active' : ''}">
+                                        <img style="max-height: 400px; cursor: pointer;"
+                                             src="#{empty image.base64Image ?
+                                             '/apputveckling-1.0-SNAPSHOT/resources/img/image_error.png' : image.base64Image}"
+                                             alt="#{item.PRODUCT_NAME}" class="d-block w-100 img-fluid"
+                                             data-bs-toggle="modal" data-bs-target="#imageModal"/>
+                                    </div>
+                                </ui:repeat>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
+                                    data-bs-slide="prev" style="top: 50%; transform: translateY(-50%);">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel"
+                                    data-bs-slide="next" style="top: 50%; transform: translateY(-50%);">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Product Details -->
+                    <div class="col-md-6 mt-5">
+                        <h2>#{item.PRODUCT_NAME}</h2>
+                        <p>#{item.PRODUCT_MAIN_DESC}</p>
+                        <p>Model: #{item.PRODUCT_YEAR}</p>
+                        <h3>Price: #{item.PRODUCT_PRICE} SEK</h3>
+                        <h:form styleClass="m-5">
+                            <h:commandButton style="float: right" value="Reserve" styleClass="btn btn-dark"
+                                             action="#{navigationBean.goToClientReserve()}"/>
+                        </h:form>
+                    </div>
+
+                </div>
+                <div class="m-5">
+                    <div class="" style="justify-content: left">
+                        <h2>About #{productBean.productsDetails.get(0).PRODUCT_NAME}</h2>
+                        <p>#{productBean.productsDetails.get(0).PRODUCT_HISTORY_DESC}</p>
+                    </div>
+                </div>
+
+            </ui:repeat>
+
+        </div>
+    </div>
+</div>

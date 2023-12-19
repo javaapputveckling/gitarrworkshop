@@ -1,0 +1,66 @@
+<div class="container-fluid row" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+     style="height: 60%; position: relative; margin: 10rem auto" xmlns:p="http://primefaces.org/ui">
+    <div class="col-md-3 order-first">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="font-bold">Boka tid</h3>
+            </div>
+            <div class="card-body">
+                <p class="font-bold">Vänligen välj en tid för mötet!</p>
+                <p class="font-bold">Mötet är 45 minuter långt.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9 order-last">
+        <h:form>
+            <p:growl id="messages" showDetail="true" escape="false" noOpener="false"/>
+            <p:schedule id="schedule" value="#{clientEventEntityBean.model}" widgetVar="myschedule" styleClass="font-bold pointer-event"
+                        view="listWeek" tooltip="true" resizable="false" draggable="false"
+                        disableWeekends="true" minTime="09:00:00" maxTime="19:00:00" showWeekNumbers="true"
+                        urlTarget="false" dir="true">
+                <p:ajax event="eventSelect" listener="#{clientEventEntityBean.onEventSelect}"
+                        update="eventDetails"
+                        oncomplete="PF('eventDialog').show();"/>
+            </p:schedule>
+
+
+            <p:dialog widgetVar="eventDialog" header="Bokningsdetaljer" showEffect="fade" hideEffect="fade" modal="true">
+                <p  class="font-bold"> Mötet är 45 minuter långt</p>
+                <h:panelGrid id="eventDetails" columns="2" cellpadding="3">
+
+                    <p:outputLabel for="title" value="Typ" styleClass="font-bold"/>
+                    <p:selectOneMenu id="title" value="#{clientEventEntityBean.event.title}" required="true">
+                        <f:selectItem itemLabel="Reparation" itemValue="Reparation"/>
+                        <f:selectItem itemLabel="Reservation" itemValue="Reservation"/>
+                        <f:selectItem itemLabel="Övrigt" itemValue="Övrigt"/>
+                    </p:selectOneMenu>
+
+
+
+                    <p:outputLabel for="client_name" value="First and Last name" styleClass="font-bold"/>
+                    <p:inputText id="client_name" value="#{clientEventEntityBean.client_name}" required="true"/>
+
+                    <p:outputLabel for="email" value="Email" styleClass="font-bold"/>
+                    <p:inputText id="email" value="#{clientEventEntityBean.email}" required="true"/>
+
+                    <p:outputLabel for="url" value="URL" styleClass="font-bold"/>
+                    <p:inputText id="url" value="#{clientEventEntityBean.event.url}"/>
+
+                    <p:outputLabel for="description" value="Description" styleClass="font-bold"/>
+                    <p:inputTextarea id="description" value="#{clientEventEntityBean.event.description}"
+                                     rows="3" cols="30"/>
+
+                </h:panelGrid>
+
+                <div class="flex justify-content-between mt-3">
+                    <p:commandButton type="reset" value="Reset" styleClass="font-bold ui-button-outlined"
+                                     ignoreAutoUpdate="false"/>
+                    <p:commandButton id="addButton" value="Save" icon="pi pi-save" action="#{clientEventEntityBean.addEvent()}"
+                                     update="messages"
+                                     oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+
+                </div>
+            </p:dialog>
+        </h:form>
+    </div>
+</div>

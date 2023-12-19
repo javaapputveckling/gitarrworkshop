@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<body>
+
+    <div class="customer_info">
+
+        <h1>Client Details</h1>
+        <h:form>
+            <h:commandButton  value="Delete Client" action="#{clientBean.deleteEntity(clientBean.clientTOedit.clientId)}"
+            style="color: white;border: none;font-size: 23px;margin-left: 2%;margin-top:2% ; background-color: red; border-radius: 5px"/>
+
+            <p:commandButton styleClass="editMember" value="Edit Client" action="editMember" update=":editMember"
+                             oncomplete="PF('editMember').show()" style="margin-left: 3%"/>
+
+        </h:form>
+
+        <p:dialog id="editMember" widgetVar="editMember" modal="true" visible="false" header="Edit Client" >
+            <ui:include src="editMember.xhtml"/>
+        </p:dialog>
+
+        <p style="margin-top: 2%;"><strong>Client ID :</strong>  #{clientBean.clientTOedit.clientId}</p>
+
+        <p ><strong>Client Name :</strong> #{clientBean.clientTOedit.clientName}</p>
+
+        <p><strong>Client Email :</strong>  #{clientBean.clientTOedit.clientEmail}</p>
+
+        <p><strong>Client Tel :</strong> #{clientBean.clientTOedit.clientPhone} </p>
+
+    </div>
+<hr/>
+
+    <div class="card">
+        <div class="row">
+
+            <div class="col">
+                <p class="card-text"><strong>Case ID: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Case Typ: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Start Date: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Completed Date: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Status: </strong></p>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <div class="card mt-3 history_list">
+
+        <ui:repeat value="#{clientBean.caseList}" var="client">
+            <div class="row">
+                <div class="col">
+                    <p class="card-text">#{client.CASE_ID}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{client.CASE_TYPE} </p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{client.CASE_DATE_START}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{client.CASE_DATE_END}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text">#{client.CASE_STATUS}</p>
+                </div>
+
+            </div>
+            <hr/>
+        </ui:repeat>
+
+
+    </div>
+
+</body>
+</html>

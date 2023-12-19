@@ -1,0 +1,125 @@
+<!DOCTYPE html [
+        <!ENTITY times "&#215;">
+        ]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<h:head>
+    <title>My Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link rel="stylesheet" href="#{request.contextPath}/assets/styles.css"/>
+    <link rel="stylesheet" href="#{request.contextPath}/assets/client.css"/>
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/bootstrap.min.css"/>
+    <style>
+        .case {
+            cursor: pointer;
+            padding: 30px;
+            margin: 10px;
+            background-color: #f0f0f0;
+            position: relative;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .arrow {
+            display: inline-block;
+            margin-right: 5px;
+            border: solid #333;
+            border-width: 0 2px 2px 0;
+            padding: 3px;
+            transform: rotate(45deg);
+            transition: transform 0.3s ease;
+        }
+        .case_des{
+            display: none;
+        }
+        .status-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .status-text {
+            font-weight: bold;
+        }
+        .search-filter-container{
+            margin: 10px;
+        }
+        .description {
+            display: none;
+            transition: max-height 0.3s ease;
+            overflow: hidden;
+        }
+    </style>
+    <script type="text/javascript" src="https://www.google.com/jsapi"> </script><!-- Google Charts -->
+    <script src="#{request.contextPath}/resources/js/statistics.js" type=""> </script>
+    <script src="#{request.contextPath}/resources/js/bootstrap.bundle.min.js" type=""> </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type=""> </script>
+    <script>
+        function toggleDescription(caseId) {
+        var description = document.getElementById("description_" + caseId);
+        var arrow = document.getElementById("arrow_" + caseId);
+        var des_title = document.getElementById("case_des_" + caseId);
+
+        if (description.style.display === 'none' || description.style.display === '') {
+            description.style.display = 'block';
+            des_title.style.display = 'block';
+            arrow.style.transform = 'rotate(225deg)';
+        } else {
+            description.style.display = 'none';
+            des_title.style.display = 'none';
+            arrow.style.transform = 'rotate(45deg)';
+        }
+    }
+        function collapseDescription(caseId) {
+            var description = document.getElementById("description_" + caseId);
+            var arrow = document.getElementById("arrow_" + caseId);
+            var des_title = document.getElementById("case_des_" + caseId);
+
+            description.style.display = 'none';
+            des_title.style.display = 'none';
+            arrow.style.transform = 'rotate(45deg)';
+        }
+    </script>
+</h:head>
+<h:body>
+    #{signup.IfNameNotExists()}
+    <ui:include src="#{signup.correctnav()}"> </ui:include>
+    <!-- <ui:include src="../../includes/client_inc/nav_client.xhtml"/> -->
+    <div class="container" style="padding: 90px">
+        <h:outputLabel value="My cases:"/>
+        <p> hej #{signup.name}</p>
+        <c:forEach var="case" items="#{casesBean.cases_details}">
+            <div class="case" data-case-id="#{case.CASE_ID}" data-case-status="#{case.CASE_STATUS}" data-case-type="#{case.CASE_TYPE}" onclick="toggleDescription(#{case.CASE_ID})">
+                <div class="status-container">
+                    <div class="status-indicator" style="background-color: #{casesBean.getStatusColor(case.CASE_STATUS)};"></div>
+                    <span class="status-text">Status: #{case.CASE_STATUS}</span>
+                </div>
+                <span id="arrow_#{case.CASE_ID}" class="arrow"></span>
+                <span class="case-number" onclick="collapseDescription(#{case.CASE_ID})">Case #{case.CASE_ID}</span>
+                <div id="case_des_#{case.CASE_ID}" class="case_des">
+                    <br />
+                    Case Type: #{case.CASE_TYPE}
+                    <br />
+                    Case Start Date: #{case.CASE_DATE_START}
+                    <br />
+                    Case End Date: #{case.CASE_DATE_END}
+                    <br />
+                    Case Description:
+                </div>
+                <div id="description_#{case.CASE_ID}" class="description" onclick="collapseDescription(#{case.CASE_ID})">
+                            #{case.CASE_DESC}
+                </div>
+            </div>
+        </c:forEach>
+    </div>
+</h:body>
+</html>

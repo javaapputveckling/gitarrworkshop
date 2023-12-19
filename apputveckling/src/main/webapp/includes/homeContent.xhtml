@@ -1,12 +1,13 @@
 <!-- Statistics page -->
 
-<div class="container-fluid" xmlns:h="http://java.sun.com/jsf/html">
+<div class="container-fluid" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="jakarta.faces.facelets"
+     xmlns:f="http://java.sun.com/jsf/core">
     <div class="row">
         <div class="col-md-9 order-md-first">
             <h1>Statistics</h1>
             <div class="card">
                 <!--<h:graphicImage styleClass="img-fluid rounded" value="../resources/img/statistics.png"/><br/>-->
-                <div id="chart-div" styleClass="img-fluid rounded card-img"></div>
+                <div id="chart-div" styleClass="img-fluid rounded card-img"> </div>
             </div>
 
         </div>
@@ -25,19 +26,23 @@
                     <p class="card-text"><strong>Earnings: </strong>276000 kr</p>
                 </div>
             </div>
+            <!-- Next Appointment Card -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="card-title">Next Appointment</h5>
+                </div>
+                <div class="card-body">
+                    <ui:repeat value="#{homeBean.events}" var="appointment">
+                        <p class="card-text"><strong>Name: </strong>#{appointment.client_name}</p>
+                        <h:outputText value="Time: " escape="false" styleClass="fw-bold"/>
+                        <h:outputText value="#{appointment.start_date}">
+                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm" />
+                        </h:outputText> <hr/>
+                    </ui:repeat>
+                </div>
+            </div>
         </div>
     </div>
-
-
-    <!-- Next Appointment Card -->
-    <div class="card mt-3">
-        <div class="card-header">
-            <h5 class="card-title">Next Appointment</h5>
-        </div>
-        <div class="card-body">
-            <p class="card-text"><strong>Name: </strong>John Doe</p>
-            <p class="card-text"><strong>Time: </strong>Tomorrow at 2:00 PM</p>
-        </div>
-    </div>
+    <button type="button" class="btn btn-primary btn-lg btn-block mt-3" onclick="window.location.href='client/ClientHome.xhtml'" >Client page</button>
 </div>
 

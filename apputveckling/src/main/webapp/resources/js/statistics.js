@@ -1,4 +1,4 @@
-$(window).resize(function(){
+(window).resize(function(){
     drawStuff();
 });
 async function drawStuff() {

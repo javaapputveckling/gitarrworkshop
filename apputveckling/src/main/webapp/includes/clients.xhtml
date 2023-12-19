@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+<body>
+
+<div class="history_div">
+    <h3>History</h3>
+    <hr/>
+
+    <div class="card">
+        <div class="row">
+
+            <div class="col">
+                <p class="card-text"><strong>Client ID: </strong></p>
+            </div>
+            <div class="col">
+                <p class="card-text"><strong>Name: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Appointment Typ: </strong></p>
+            </div>
+
+            <div class="col">
+                <p class="card-text"><strong>Completed Date: </strong></p>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="card mt-3 history_list">
+
+        <ui:repeat value="#{clientBean.historyClientList}" var="client">
+            <div class="row">
+                <div class="col">
+                    <p class="card-text">#{client.clientId}</p>
+                </div>
+
+                <div class="col">
+                    <p class="card-text"> #{client.clientName}</p>
+                </div>
+
+                <div class="col">
+                    #{clientBean.FindCase(client.clientId)}
+                    <p class="card-text"> #{clientBean.caseData.CASE_TYPE}</p>
+                </div>
+
+                <div class="col">
+                    #{clientBean.FindCase(client.clientId)}
+                    <p class="card-text"> #{clientBean.caseData.CASE_DATE_END}</p>
+                </div>
+
+
+            </div>
+            <hr/>
+        </ui:repeat>
+
+
+    </div>
+</div>
+
+
+<div class=" m-3 p-xl-4 Medlemmar">
+    <!-- Your content goes here -->
+
+
+    <h:form>
+        <h5 style="margin-top:2px">Client List</h5>
+        <h:inputText styleClass="custom-input" value="#{clientBean.searchName}"/>
+        <h:commandButton styleClass="custom-button" value="Submit" action="#{clientBean.SearchClient()}"/>
+    </h:form>
+
+    <div class="list-group list-group-action test">
+        <h:form>
+
+            <ui:repeat value="#{clientBean.clientList}" var="client">
+                <h:commandLink action="#{clientBean.collectClientInfo(client.clientId)}" styleClass="list-group-item list-group-item-action">
+                    <f:param name="clientId" value="#{client.clientId}" />
+
+                  #{client.clientName}
+                </h:commandLink>
+            </ui:repeat>
+        </h:form>
+
+    </div>
+
+    <h:form>
+        <p:commandButton styleClass="add_button m-3" value="Add New Client" action="#{clientBean.newClient}" update=":addcilent"
+                         oncomplete="PF('addcilent').show()"/>
+
+    </h:form>
+
+    <p:dialog id="addcilent" widgetVar="addcilent" modal="true" visible="false" header="Add Client" >
+        <ui:include src="editClient.xhtml"/>
+    </p:dialog>
+
+</div>
+
+
+</body>
+</html>

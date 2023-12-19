@@ -1,16 +1,26 @@
 package admin.DB;
 
+import jakarta.annotation.ManagedBean;
 import jakarta.annotation.Resource;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.security.enterprise.credential.Password;
 
 import javax.sql.DataSource;
+import java.io.Serializable;
 import java.sql.*;
 
-public class DB {
-
-
+@Named
+@Default
+@ApplicationScoped
+@ManagedBean
+public class DB implements Serializable {
+    private DB databaseExample;
     @Resource(name = "mysql_web")
     private DataSource dataSource;
-
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -27,14 +37,15 @@ public class DB {
         }
     }
 
-    public void CreateTableMembers(){
+    public void CreateTableClient(){
         try (Connection con = dataSource.getConnection()) {
-            String sql = "CREATE TABLE IF NOT EXISTS Member("
-                    +"Member_id INT AUTO_INCREMENT PRIMARY KEY,"
-                    + "Member_name VARCHAR(255),"
-                    + "Member_date datetime,"
-                    + "Member_phone int,"
-                    + "Member_email VARCHAR(255))";
+            String sql = "CREATE TABLE IF NOT EXISTS CLIENT("
+                    +"CLIENT_ID INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "CLIENT_NAME VARCHAR(255),"
+                    + "CLIENT_PHONE VARCHAR(20),"
+                    + "CLIENT_EMAIL VARCHAR(255),"
+                    + "CLIENT_DATE date," +
+                    "PASSWORD VARCHAR(200))";
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.executeUpdate();
             }
@@ -45,13 +56,13 @@ public class DB {
     }
     public void CreateTableProduct(){
         try (Connection con = dataSource.getConnection()) {
-            String sql = "CREATE TABLE IF NOT EXISTS Product("
-                    +"Product_id INT AUTO_INCREMENT PRIMARY KEY,"
-                    + "Product_price int,"
-                    + " Product_amount int,"
-                    + "Product_description VARCHAR(255),"
-                    + "Product_case VARCHAR(255),"
-                    + "Product_image VARCHAR(255))";
+            String sql = "CREATE TABLE IF NOT EXISTS PRODUCT("
+                    +"PRODUCT_ID INT AUTO_INCREMENT PRIMARY KEY,"
+                    + "PRODUCT_PRICE DECIMAL(10,2),"
+                    + "PRODUCT_HISTORY_DESC VARCHAR(255),"
+                    + "PRODUCT_MAIN_DESC VARCHAR(500),"
+                    + "PRODUCT_YEAR INT,"
+                    + "PRODUCT_NAME VARCHAR(255))";
             try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
                 preparedStatement.executeUpdate();
             }
@@ -185,7 +196,72 @@ public class DB {
         }
     }
 
+    public String GetDescByID(int id) {
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = "SELECT CASE_DESC FROM CASES WHERE MEMBER_ID = ?";
 
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            StringBuilder caseDescription = new StringBuilder();
+
+            while (rs.next()) {
+                // Retrieve the result and append to the StringBuilder
+                String partialDescription = rs.getString("CASE_DESC");
+                caseDescription.append(partialDescription).append(" ");
+            }
+            //caseDescription.append("\n");
+
+            // Close resources
+            rs.close();
+            preparedStatement.close();
+            con.close();
+
+            // Convert StringBuilder to String and return
+            String fullDescription = caseDescription.toString().trim();
+            //System.out.println(fullDescription);
+            return fullDescription;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*
+    public String GetDescByID(int id) {
+
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = "SELECT CASE_DESC FROM CASES WHERE MEMBER_ID = ?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            // Set the parameter value
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            String medlems_desc ="ingenting";
+
+            if (rs.next()) {
+                // Retrieve the result
+                medlems_desc = rs.getString("CASE_DESC");
+            }
+
+            // Close resources
+            rs.close();
+            preparedStatement.close();
+            con.close();
+            System.out.println(medlems_desc);
+            return medlems_desc;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+ */
     public String getNameById(int id) {
 
         try {
@@ -220,18 +296,117 @@ public class DB {
         }
     }
 
-    public void InsertMember(String name, Date date, int phoneNumber, String email){
+    public int GetIdByName(String name) {
 
         try {
             Connection con = dataSource.getConnection();
-            String sql = "INSERT INTO Member (Member_name, Member_date, Member_phone,Member_email) VALUES (?, ?,?,?)";
+            String sql = "SELECT CLIENT_ID FROM CLIENT WHERE CLIENT_NAME = ?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            // Set the parameter value
+            preparedStatement.setString(1, name);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            int id =0;
+
+            if (rs.next()) {
+                // Retrieve the result
+                id = rs.getInt("CLIENT_ID");
+                //System.out.println(id);
+            }
+
+            // Close resources
+            rs.close();
+            preparedStatement.close();
+            con.close();
+
+            return id;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public String GetPasswordByName(String name) {
+
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = "SELECT PASSWORD FROM CLIENT WHERE CLIENT_NAME = ?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            // Set the parameter value
+            preparedStatement.setString(1, name);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            String member_password ="";
+
+            if (rs.next()) {
+                // Retrieve the result
+                member_password = rs.getString("PASSWORD");
+                //System.out.println(id);
+            } /*else {
+                System.out.println("User with ID " + name + " not found.");
+            }*/
+
+            // Close resources
+            rs.close();
+            preparedStatement.close();
+            con.close();
+
+            return member_password;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public String GetNameByName(String name) {
+
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = "SELECT CLIENT_NAME FROM CLIENT WHERE CLIENT_NAME = ?";
+
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+            // Set the parameter value
+            preparedStatement.setString(1, name);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            String medlems_nummer ="";
+
+            if (rs.next()) {
+                // Retrieve the result
+                medlems_nummer = rs.getString("CLIENT_NAME");
+                //System.out.println(medlems_nummer);
+            } /*else {
+                System.out.println("User with ID " + id + " not found.");
+            }*/
+
+            // Close resources
+            rs.close();
+            preparedStatement.close();
+            con.close();
+
+            return medlems_nummer;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void InsertMember(String name, String phoneNumber, String email, String password){
+
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = "INSERT INTO CLIENT (CLIENT_NAME, CLIENT_PHONE, CLIENT_EMAIL,PASSWORD ,CLIENT_DATE) VALUES (?,?,?,?,CURRENT_DATE)";
 
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setString(1, name);
-            preparedStatement.setDate(2, date);
-            preparedStatement.setInt(3, phoneNumber);
-            preparedStatement.setString(4, email);
+            preparedStatement.setString(2, phoneNumber);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, password);
 
 
             int rowsAffected = preparedStatement.executeUpdate();
@@ -282,22 +457,24 @@ public class DB {
 
         DB databaseExample = new DB();
         //fixar en connection setURL, setUser och setPassword.
-        SetDB DBsource = new SetDB();
+        //SetDB DBsource = new SetDB();
         // Set the DataSource on the DatabaseExample instance
-        databaseExample.setDataSource(DBsource.setDB());
+        //databaseExample.setDataSource(DBsource.setDB());
 
         //skapa en ny db om den inte existerar.
-        databaseExample.CreateDB();
-        databaseExample.CreateTableMembers();
-        databaseExample.CreateTableCase();
-        databaseExample.CreateTableProduct();
-        databaseExample.CreateTableCaseType();
+        //databaseExample.CreateDB();
+        //databaseExample.CreateTableMembers();
+        //databaseExample.CreateTableCase();
+        //databaseExample.CreateTableProduct();
+        //databaseExample.CreateTableCaseType();
 
         // Now, you can call fetchData
         //databaseExample.fetchData();
         //databaseExample.getIdByPhonNum(700389406);
         //databaseExample.getIdByEmail("jojo2109@student.miun.se");
+        //databaseExample.GetIdByName("f");
         //databaseExample.getNameById(1);
+        //databaseExample.GetDescByID(1);
 //måste fixas        databaseExample.InsertMember("jag",20,1234567,"jagj2723@gmail.com");
         //databaseExample.GetAllName();
     }
