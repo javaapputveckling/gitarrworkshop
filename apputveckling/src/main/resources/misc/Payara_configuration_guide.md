@@ -1,4 +1,4 @@
-    ## Configuration guide for the database connection with Payara and MySQL(via XAMPP)
+# Configuration guide for the database connection with Payara and MySQL(via XAMPP)
 
 1. Download MySQL Connector/J (platform independent version) and unzip the folder to
    /PAYARADIR/glassfish/domains/domain1/
